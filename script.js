@@ -21,6 +21,8 @@ const PROJECTS = [
     approach: 'Pulled and cleaned a dataset of 7,032 customers using pandas. Conducted exploratory data analysis to segment customers by contract type, tenure, and service usage. Built visualisations in matplotlib and seaborn, and modelled churn predictors. Imported into MySQL for structured querying and built a Power BI dashboard for business reporting.',
     outcome: 'Identified a 26.58% overall churn rate. Discovered that 42.71% of month-to-month contract customers churned, and that 47.68% of new customers left within their first year — pointing to an onboarding and early-retention problem.',
     github: 'https://github.com/mazwiibaxolele/FUTURE_DS_02',
+    image1: 'images/project1-a.png',
+    image2: 'images/project1-b.jpeg'
   },
   {
     id: 2,
@@ -33,6 +35,8 @@ const PROJECTS = [
     approach: 'Analysed campaign data using MySQL to segment leads by stage, channel, and outcome. Built conversion rate calculations at each funnel stage. Designed a Power BI dashboard to give the marketing team a live view of performance by channel and campaign type.',
     outcome: 'Identified the funnel stages with highest drop-off rates and the specific channels that produced the best conversion rates, enabling data-informed budget reallocation.',
     github: 'https://github.com/mazwiibaxolele/FUTURE_DS_03',
+    image1: 'images/project2-a.jpeg',
+    image2: 'images/project2-b.jpeg'
   },
   {
     id: 3,
@@ -45,7 +49,10 @@ const PROJECTS = [
     approach: 'Ingested and transformed the raw Excel data using Power Query. Built a relational data model and wrote DAX measures for revenue, profit margin, YoY growth, and segment performance. Designed an interactive dashboard with slicers for region, product, and time period.',
     outcome: 'Delivered a single-view dashboard that revealed which product categories and regions were underperforming and where the highest margins were being generated.',
     github: 'https://github.com/mazwiibaxolele/FUTURE_DS_01',
+    image1: 'images/project3-a.jpeg',
+    image2: 'images/project3-b.png'
   },
+  /* 
   {
     id: 4,
     title: 'E-Commerce Funnel and Revenue Analysis',
@@ -70,6 +77,7 @@ const PROJECTS = [
     outcome: 'Produced a comprehensive technology trends report covering current and future skill demand, identifying rising languages and frameworks, and delivering actionable insights for learning and hiring strategy.',
     github: 'https://github.com/mazwiibaxolele/capstone-data-analytics',
   },
+  */
 ];
 
 const EXPERIENCES = [
@@ -307,12 +315,16 @@ function buildProjectCard(p) {
   const toolsHTML = p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('');
   const badgeHTML = p.featured ? '<span class="badge-featured">Featured</span>' : '';
 
+  const imageHTML = p.image1 
+    ? `<img src="${p.image1}" alt="${p.title}" style="width:100%; height:100%; object-fit:cover;" />`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+         <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+       </svg>`;
+
   const card = createEl('div', { className: 'project-card reveal', 'data-id': p.id });
   card.innerHTML = `
     <div class="project-card-img">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
-      </svg>
+      ${imageHTML}
     </div>
     <div class="project-card-body">
       <div class="project-meta">
@@ -359,18 +371,24 @@ function openProjectDetail(id) {
 
   const toolsHTML = p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('');
   const others    = PROJECTS.filter(x => x.id !== id).slice(0, 2);
-  const relatedHTML = others.map(o => `
-    <div class="project-card" style="cursor:pointer;" onclick="openProjectDetail(${o.id})">
-      <div class="project-card-img" style="height:100px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" style="width:28px;height:28px;opacity:.3">
+  const relatedHTML = others.map(o => {
+    const relatedImg = o.image1 
+      ? `<img src="${o.image1}" alt="${o.title}" style="width:100%; height:100%; object-fit:cover;" />`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" style="width:28px;height:28px;opacity:.3">
           <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
-        </svg>
+        </svg>`;
+        
+    return `
+    <div class="project-card" style="cursor:pointer;" onclick="openProjectDetail(${o.id})">
+      <div class="project-card-img" style="height:100px; padding:0;">
+        ${relatedImg}
       </div>
       <div class="project-card-body">
         <div class="project-meta"><span class="project-category">${o.category}</span></div>
         <h3 class="project-title" style="font-size:1rem">${o.title}</h3>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   const detail = qs('#project-detail');
   const content = qs('#detail-content');
@@ -380,8 +398,8 @@ function openProjectDetail(id) {
     <p style="font-family:'Crimson Pro',serif;font-style:italic;color:var(--text-secondary);margin-bottom:2.5rem">${p.category}</p>
 
     <div class="detail-screenshots">
-      <div class="screenshot-placeholder">Screenshot / Dashboard Image 1</div>
-      <div class="screenshot-placeholder">Screenshot / Dashboard Image 2</div>
+      ${p.image1 ? `<img src="${p.image1}" alt="${p.title}" style="width:100%; border-radius:var(--radius-card); border:1px solid var(--glass-border); aspect-ratio: 16/9; object-fit: cover;" />` : ''}
+      ${p.image2 ? `<img src="${p.image2}" alt="${p.title} extra" style="width:100%; border-radius:var(--radius-card); border:1px solid var(--glass-border); aspect-ratio: 16/9; object-fit: cover;" />` : ''}
     </div>
 
     <div class="detail-section">
