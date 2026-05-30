@@ -80,6 +80,7 @@ const EXPERIENCES = [
     period: 'April 2026 – Present',
     location: 'Johannesburg, South Africa',
     desc: 'Mentoring students within the Construction Economics and Management faculty at Wits, supporting their academic development and professional preparation.',
+    image: 'images/exp-mentor.png'
   },
   {
     role: 'Quantities and Specification Tutor',
@@ -88,6 +89,7 @@ const EXPERIENCES = [
     period: 'February 2026 – Present',
     location: 'Johannesburg, South Africa',
     desc: 'Tutoring students in quantities and specification as part of the ASAQS programme, helping candidates develop technical proficiency in core quantity surveying competencies.',
+    image: 'images/exp-tutor.png'
   },
   {
     role: 'Data Science and Analytics Intern',
@@ -96,6 +98,7 @@ const EXPERIENCES = [
     period: 'April 2026',
     location: 'Remote',
     desc: 'Completed three end-to-end analytics projects covering business sales performance, customer churn analysis, and marketing funnel evaluation — applying Python, SQL, and Power BI throughout.',
+    image: 'images/exp-intern-data.JPG'
   },
   {
     role: 'Student Intern — Civil Construction',
@@ -104,6 +107,7 @@ const EXPERIENCES = [
     period: 'June 2025 – July 2025',
     location: 'Johannesburg, South Africa',
     desc: 'Supported delivery of roadworks and retaining walls. Conducted GNSS-based engineering surveying, assisted with trench preparation, and contributed to traffic accommodation setup.',
+    image: 'images/exp-intern-civil.JPG'
   },
   {
     role: 'CIOB Subcommittee Treasurer and Member',
@@ -112,6 +116,7 @@ const EXPERIENCES = [
     period: 'February 2025 – October 2025',
     location: 'Johannesburg, South Africa',
     desc: 'Managed financial accounts for the CIOB subcommittee, overseeing budget tracking and financial reporting for the Africa Novus student chapter at Wits.',
+    image: 'images/exp-ciob.png'
   },
   {
     role: 'Student Intern',
@@ -120,6 +125,7 @@ const EXPERIENCES = [
     period: 'June 2024',
     location: 'Northam, Limpopo, South Africa',
     desc: 'Assisted with project coordination, progress tracking, and site reporting — gaining exposure to construction project management in an active site environment.',
+    image: 'images/exp-intern-priotech.HEIC'
   },
 ];
 
@@ -421,13 +427,17 @@ function closeProjectDetail() {
 let expIndex = 0;
 
 function buildExpCard(e) {
+  const photoContent = e.image 
+    ? `<img src="${e.image}" alt="${e.role}" style="width:100%; height:100%; object-fit:cover;" />`
+    : `<div class="exp-photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Add Photo</p>
+        </div>`;
+
   return `
     <div class="exp-card">
       <div class="exp-photo">
-        <div class="exp-photo-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <p>Add Photo</p>
-        </div>
+        ${photoContent}
       </div>
       <div class="exp-body">
         <h3 class="exp-role">${e.role}</h3>
