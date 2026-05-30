@@ -428,7 +428,7 @@ let expIndex = 0;
 
 function buildExpCard(e) {
   const photoContent = e.image 
-    ? `<img src="${e.image}" alt="${e.role}" style="width:100%; height:100%; object-fit:cover;" />`
+    ? `<img src="${e.image}" alt="${e.role}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />`
     : `<div class="exp-photo-placeholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           <p>Add Photo</p>
