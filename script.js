@@ -107,7 +107,7 @@ const EXPERIENCES = [
     period: 'June 2025 – July 2025',
     location: 'Johannesburg, South Africa',
     desc: 'Supported delivery of roadworks and retaining walls. Conducted GNSS-based engineering surveying, assisted with trench preparation, and contributed to traffic accommodation setup.',
-    image: 'images/exp-intern-civil.JPG'
+    image: 'images/exp-intern-civil.png'
   },
   {
     role: 'CIOB Subcommittee Treasurer and Member',
@@ -125,7 +125,7 @@ const EXPERIENCES = [
     period: 'June 2024',
     location: 'Northam, Limpopo, South Africa',
     desc: 'Assisted with project coordination, progress tracking, and site reporting — gaining exposure to construction project management in an active site environment.',
-    image: 'images/exp-intern-priotech.HEIC'
+    image: 'images/exp-intern-priotech.jpg'
   },
 ];
 
