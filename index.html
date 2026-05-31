@@ -4,395 +4,160 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Baxolele Mazwi — Construction student at Wits & Data Analytics specialist. BSc Construction · Data Analytics. Portfolio of projects, experience, and skills." />
-  <meta name="keywords" content="Baxolele Mazwi, Construction, Data Analytics, Wits, Portfolio, Python, SQL, Power BI" />
-  <meta name="author" content="Baxolele Mazwi" />
-  <meta property="og:title" content="Baxolele Mazwi — Portfolio" />
-  <meta property="og:description" content="BSc Construction student at Wits & Data Analytics specialist." />
-  <meta property="og:type" content="website" />
-  <title>Baxolele Mazwi — Portfolio</title>
+  <title>Baxolele Mazwi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <!-- Minimal Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- PARTICLE CANVAS -->
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
-
   <!-- NAVIGATION -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <div class="nav-logo" aria-label="Baxolele Mazwi">BM</div>
-      <div class="nav-pill">
-        <a href="#home"           class="nav-link active" data-section="home">Home</a>
-        <a href="#about"          class="nav-link" data-section="about">About</a>
-        <a href="#projects"       class="nav-link" data-section="projects">Projects</a>
-        <a href="#experience"     class="nav-link" data-section="experience">Experience</a>
-        <a href="#skills"         class="nav-link" data-section="skills">Skills</a>
-        <a href="#certifications" class="nav-link" data-section="certifications">Certifications</a>
-        <a href="#documents"      class="nav-link" data-section="documents">Documents</a>
-        <a href="#contact"        class="nav-link" data-section="contact">Contact</a>
+  <nav id="navbar" role="navigation">
+    <div class="nav-inner minimal-container">
+      <div class="nav-avatar">
+        <img src="images/profile.png" alt="BM">
       </div>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <div class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- ========== SECTION 1 — HOME ========== -->
-  <section id="home" class="section section-home">
-    <div class="container home-grid">
-      <div class="home-left reveal">
-        <p class="home-greeting">Hi, my name is</p>
-        <h1 class="home-name">
-          <span id="typewriter-mazwi" class="name-orange"></span><span id="cursor-mazwi" class="cursor">|</span>
-          <span id="fadeIn-baxolele" class="name-white fade-hidden"> Baxolele</span>
-        </h1>
-        <p class="home-role">BSc Construction · Data Analytics</p>
-        <p class="home-bio">I sit at the intersection of construction and data — from real sites in Johannesburg to analytical workflows in Python and Power BI. I'm building toward roles in project controls, planning, and digital construction environments.</p>
-        <div class="home-buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="documents/Baxolele_Mazwi_CV.pdf" class="btn btn-ghost" download>Download CV</a>
+  <main class="main-content minimal-container">
+    
+    <!-- ========== HOME ========== -->
+    <section id="home" class="section">
+      <div class="home-hero reveal">
+        <h1 class="hero-title">hello, Baxolele here</h1>
+        <p class="hero-subtitle">Construction student at Wits &amp; Data Analytics specialist bridging the gap between site execution and digital strategy.</p>
+      </div>
+      
+      <div class="home-latest reveal reveal-delay">
+        <div class="latest-header">
+          <h3>Latest Project</h3>
         </div>
-        <div class="home-socials">
-          <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener" class="social-icon-btn" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener" class="social-icon-btn" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          </a>
-          <a href="mailto:mazwiibaxolele@gmail.com" class="social-icon-btn" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </a>
+        <div class="latest-card" id="home-latest-project">
+          <!-- Injected by JS -->
         </div>
       </div>
-      <div class="home-right reveal reveal-delay">
-        <div class="avatar-wrap">
-          <div class="avatar-ring"></div>
-          <div class="avatar-circle">
-            <img src="images/profile.png" alt="Baxolele Mazwi" class="avatar-img" />
-          </div>
-        </div>
-        <p class="avatar-name">Baxolele Mazwi</p>
-        <p class="avatar-city">Johannesburg, South Africa</p>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="section">
+      <div class="section-header reveal">
+        <h2>About</h2>
+        <p>Who I am.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 2 — ABOUT ========== -->
-  <section id="about" class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">01 · About</p>
-      <h2 class="section-heading reveal">Who I Am</h2>
-      <div class="about-grid">
-        <div class="about-story reveal">
-          <p>Ever watched a construction decision go wrong? Not just "oops" wrong. Millions-in-budget, years-of-delays wrong. I'm a Construction student at Wits, and early on I noticed something — a lot of site decisions still come down to experience and gut feel. Which works, until it spectacularly doesn't.</p>
-          <p>That 50/50 feeling pulled me into data. I got curious about moving from "I think this will work" to "the data says otherwise, and here's why."</p>
-          <p>I still love the core of construction — being on site, watching drawings become real things you can stand on. But now I'm equally interested in what happens before that: predicting risks, planning smarter, and replacing guesswork with evidence.</p>
-          <p>Through site exposure at Azra Developments and Priotech Projects, I've worked alongside engineers, quantity surveyors, and project managers in real environments. To back that up, I completed the IBM Data Analytics Certificate and I'm building in Python, SQL, and data workflows.</p>
-          <p>The goal: roles where construction knowledge and data thinking work together — in project controls, planning, and digital construction environments.</p>
-        </div>
-        <div class="about-card glass-card reveal reveal-delay">
-          <div class="about-info-row">
-            <div class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <p class="info-label">City</p>
-              <p class="info-value">Johannesburg, South Africa</p>
-            </div>
-          </div>
-          <div class="about-info-row">
-            <div class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
-            <div>
-              <p class="info-label">University</p>
-              <p class="info-value">University of the Witwatersrand</p>
-            </div>
-          </div>
-          <div class="about-info-row">
-            <div class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <p class="info-label">Email</p>
-              <p class="info-value"><a href="mailto:mazwiibaxolele@gmail.com">mazwiibaxolele@gmail.com</a></p>
-            </div>
-          </div>
-          <div class="about-info-row">
-            <div class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div>
-              <p class="info-label">Graduating</p>
-              <p class="info-value">2027</p>
-            </div>
-          </div>
-          <div class="about-socials">
-            <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener" class="social-icon-btn" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener" class="social-icon-btn" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="mailto:mazwiibaxolele@gmail.com" class="social-icon-btn" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 3 — PROJECTS ========== -->
-  <section id="projects" class="section">
-    <div class="container">
-      <p class="section-label reveal">02 · Projects</p>
-      <h2 class="section-heading reveal">Selected Work</h2>
-
-      <div class="projects-grid" id="projects-grid">
-        <!-- Cards injected by JS -->
+      
+      <div class="photo-fan reveal reveal-delay">
+        <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.png" alt="Civil"></div>
+        <div class="fan-img-wrap img-2"><img src="images/exp-mentor.png" alt="Mentor"></div>
+        <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Priotech"></div>
+        <div class="fan-img-wrap img-4"><img src="images/exp-tutor.png" alt="Tutor"></div>
       </div>
 
-      <div class="projects-expand reveal">
-        <button class="btn btn-ghost" id="expand-projects-btn">Show All Projects</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROJECT DETAIL VIEW ========== -->
-  <div id="project-detail" class="project-detail hidden" aria-modal="true" role="dialog">
-    <div class="detail-inner container">
-      <button class="btn-back" id="back-btn" aria-label="Back to projects">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        Back to Projects
-      </button>
-      <div id="detail-content"></div>
-    </div>
-  </div>
-
-  <!-- ========== SECTION 4 — EXPERIENCE ========== -->
-  <section id="experience" class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">03 · Experience</p>
-      <h2 class="section-heading reveal">Where I've Worked</h2>
-      <div class="carousel-wrap reveal">
-        <div class="carousel-track" id="exp-track">
-          <!-- Cards injected by JS -->
+      <div class="timeline-container reveal reveal-delay-2">
+        <div class="timeline-header">
+          <h3>Timeline</h3>
         </div>
-        <button class="carousel-btn carousel-prev" id="exp-prev" aria-label="Previous experience">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="carousel-btn carousel-next" id="exp-next" aria-label="Next experience">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-      <div class="carousel-dots" id="exp-dots" aria-label="Experience navigation"></div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 5 — SKILLS ========== -->
-  <section id="skills" class="section">
-    <div class="container">
-      <p class="section-label reveal">04 · Skills</p>
-      <h2 class="section-heading reveal">What I Work With</h2>
-      <div class="skills-groups reveal">
-        <div class="skill-group">
-          <h3 class="skill-group-title">Data &amp; Analytics</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">SQL</span>
-            <span class="skill-pill">pandas</span>
-            <span class="skill-pill">matplotlib</span>
-            <span class="skill-pill">seaborn</span>
-            <span class="skill-pill">Power BI</span>
-            <span class="skill-pill">Excel</span>
-            <span class="skill-pill">Git &amp; GitHub</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3 class="skill-group-title">Core Strengths</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Problem Solving</span>
-            <span class="skill-pill">Analytical Thinking</span>
-            <span class="skill-pill">Data Storytelling</span>
-            <span class="skill-pill">Attention to Detail</span>
-            <span class="skill-pill">Communication</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3 class="skill-group-title">Construction</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Project Controls</span>
-            <span class="skill-pill">Management</span>
-            <span class="skill-pill">Engineering Surveying</span>
-            <span class="skill-pill">Quantity Surveying</span>
-            <span class="skill-pill">Site Engineering</span>
-          </div>
+        <div class="timeline" id="experience-timeline">
+          <!-- Injected by JS -->
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== SECTION 6 — CERTIFICATIONS ========== -->
-  <section id="certifications" class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">05 · Certifications</p>
-      <h2 class="section-heading reveal">Credentials</h2>
-      <div class="cert-tabs reveal" role="tablist" aria-label="Certification filter">
-        <button class="cert-tab active" data-filter="IBM" role="tab" aria-selected="true">IBM</button>
-        <button class="cert-tab" data-filter="DataCamp" role="tab" aria-selected="false">DataCamp</button>
-        <button class="cert-tab" data-filter="Microsoft" role="tab" aria-selected="false">Microsoft</button>
-        <button class="cert-tab" data-filter="Other" role="tab" aria-selected="false">Other</button>
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" class="section">
+      <div class="section-header reveal">
+        <h2>Projects</h2>
+        <p>Selected work.</p>
       </div>
-      <div class="cert-grid reveal" id="cert-grid">
+      <div class="projects-list" id="projects-list">
         <!-- Injected by JS -->
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== SECTION 7 — DOCUMENTS ========== -->
-  <section id="documents" class="section">
-    <div class="container">
-      <p class="section-label reveal">06 · Documents</p>
-      <h2 class="section-heading reveal">Files &amp; Downloads</h2>
-      <div class="docs-grid">
-        <div class="docs-list reveal">
-          <div class="doc-row glass-card">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            </div>
-            <div class="doc-info">
-              <p class="doc-name">Curriculum Vitae</p>
-              <p class="doc-meta">Baxolele Mazwi, 2026</p>
-            </div>
-            <a href="documents/Baxolele_Mazwi_CV.pdf" class="btn btn-sm btn-primary" download>Download</a>
-          </div>
-          <div class="doc-row glass-card">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-            </div>
-            <div class="doc-info">
-              <p class="doc-name">IBM Data Analyst Certificate</p>
-              <p class="doc-meta">Coursera, January 2026</p>
-            </div>
-            <a href="https://www.coursera.org/account/accomplishments/professional-cert/verify" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">View</a>
-          </div>
-          <div class="doc-row glass-card">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <div class="doc-info">
-              <p class="doc-name">Letter of Recommendation</p>
-              <p class="doc-meta">Future Interns, April 2026</p>
-            </div>
-            <a href="documents/Recommendation_FutureInterns.pdf" class="btn btn-sm btn-primary" download>Download</a>
-          </div>
-          <div class="doc-row glass-card">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div class="doc-info">
-              <p class="doc-name">AZRA Developments Confirmation</p>
-              <p class="doc-meta">Site Internship, July 2025</p>
-            </div>
-            <a href="documents/AZRA_Confirmation.pdf" class="btn btn-sm btn-primary" download>Download</a>
-          </div>
-        </div>
-        <div class="docs-upload reveal reveal-delay">
-          <div class="upload-card glass-card" id="upload-zone">
-            <div class="upload-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-            </div>
-            <p class="upload-title">Upload a Document</p>
-            <p class="upload-sub">Drag &amp; drop here, or click to browse</p>
-            <input type="file" id="file-input" class="file-input" aria-label="Upload document" accept=".pdf,.doc,.docx" />
-            <label for="file-input" class="btn btn-ghost upload-btn">Browse Files</label>
-            <p class="upload-formats">PDF, DOC, DOCX — max 10 MB</p>
-            <div id="upload-status" class="upload-status hidden"></div>
-          </div>
-        </div>
+    <!-- PROJECT DETAIL VIEW (Modal) -->
+    <div id="project-detail" class="project-detail hidden" aria-modal="true" role="dialog">
+      <div class="detail-inner minimal-container">
+        <button class="btn-back" id="back-btn" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </button>
+        <div id="detail-content"></div>
       </div>
     </div>
-  </section>
 
-  <!-- ========== SECTION 8 — CONTACT ========== -->
-  <section id="contact" class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">07 · Contact</p>
-      <h2 class="section-heading reveal">Get In Touch</h2>
-      <div class="contact-grid">
-        <div class="contact-links reveal">
-          <a href="mailto:mazwiibaxolele@gmail.com" class="contact-card glass-card" aria-label="Send email">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <p class="contact-label">Email</p>
-              <p class="contact-value">mazwiibaxolele@gmail.com</p>
-            </div>
-          </a>
-          <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener" class="contact-card glass-card" aria-label="LinkedIn profile">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </div>
-            <div>
-              <p class="contact-label">LinkedIn</p>
-              <p class="contact-value">linkedin.com/in/baxolele-mazwi</p>
-            </div>
-          </a>
-          <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener" class="contact-card glass-card" aria-label="GitHub profile">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </div>
-            <div>
-              <p class="contact-label">GitHub</p>
-              <p class="contact-value">github.com/mazwiibaxolele</p>
-            </div>
-          </a>
-          <a href="https://twitter.com/mazwiibaxolele" target="_blank" rel="noopener" class="contact-card glass-card" aria-label="Twitter/X profile">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </div>
-            <div>
-              <p class="contact-label">Twitter / X</p>
-              <p class="contact-value">@mazwiibaxolele</p>
-            </div>
-          </a>
-        </div>
-        <div class="contact-cta reveal reveal-delay">
-          <div class="cta-card glass-card">
-            <p class="cta-label">Reach out directly</p>
-            <p class="cta-body">Whether you're a recruiter, a collaborator, or just curious about my work — I'm always open to a conversation. Send me an email and I'll get back to you.</p>
-            <a href="mailto:mazwiibaxolele@gmail.com" class="btn btn-primary btn-lg">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Send Email
-            </a>
-          </div>
-        </div>
+    <!-- ========== CERTIFICATIONS ========== -->
+    <section id="certifications" class="section">
+      <div class="section-header reveal">
+        <h2>Certifications</h2>
+        <p>Credentials & learning paths.</p>
       </div>
-    </div>
-  </section>
+      <div class="certs-container" id="certs-container">
+        <!-- Injected by JS -->
+      </div>
+    </section>
 
-  <!-- ========== FOOTER ========== -->
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section">
+      <div class="section-header reveal">
+        <h2>Contact</h2>
+        <p>Let's connect.</p>
+      </div>
+      <p class="contact-desc reveal">Connect with me through any of these platforms.</p>
+      <div class="contact-grid reveal reveal-delay">
+        <a href="mailto:mazwiibaxolele@gmail.com" class="contact-pill">
+          <div class="cp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="cp-info">
+            <span class="cp-title">Email</span>
+            <span class="cp-val">mazwiibaxolele@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" class="contact-pill">
+          <div class="cp-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div class="cp-info">
+            <span class="cp-title">LinkedIn</span>
+            <span class="cp-val">in/baxolele-mazwi</span>
+          </div>
+        </a>
+        <a href="https://github.com/mazwiibaxolele" target="_blank" class="contact-pill">
+          <div class="cp-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+          <div class="cp-info">
+            <span class="cp-title">GitHub</span>
+            <span class="cp-val">mazwiibaxolele</span>
+          </div>
+        </a>
+        <a href="documents/Baxolele_Mazwi_CV.pdf" download class="contact-pill">
+          <div class="cp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div class="cp-info">
+            <span class="cp-title">CV</span>
+            <span class="cp-val">Download PDF</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-name"><em>Baxolele Mazwi</em></p>
-      <p class="footer-copy">&copy; 2026 — All rights reserved</p>
-      <div class="footer-links">
-        <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        </a>
-        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="mailto:mazwiibaxolele@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
+    <div class="minimal-container footer-inner">
+      <div class="footer-socials">
+        <a href="https://github.com/mazwiibaxolele" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="mailto:mazwiibaxolele@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
       </div>
+      <p>&copy; 2026 Baxolele Mazwi.</p>
     </div>
   </footer>
 
