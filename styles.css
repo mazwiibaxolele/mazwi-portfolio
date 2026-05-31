@@ -175,9 +175,20 @@ svg { display: block; }
 
 /* ── Sections ──────────────────────────────────────── */
 .section {
+  display: none;
   min-height: 100vh;
   padding: 120px 0 80px;
   position: relative;
+  animation: fadeInSection 0.5s ease-out forwards;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeInSection {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .section-alt { background-color: var(--bg-alt); }

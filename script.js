@@ -272,38 +272,67 @@ function initTypewriter() {
 /* ─────────────────────────────────────────────────────
    SCROLL REVEAL
 ───────────────────────────────────────────────────── */
+let revealObserver;
 function initReveal() {
-  const io = new IntersectionObserver((entries) => {
+  if (revealObserver) revealObserver.disconnect();
+  
+  revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('is-visible');
-        io.unobserve(e.target);
+        revealObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  qsa('.reveal').forEach(el => io.observe(el));
+  qsa('.reveal').forEach(el => revealObserver.observe(el));
 }
 
 /* ─────────────────────────────────────────────────────
-   ACTIVE NAV (Intersection Observer)
+   NAVIGATION (TABBED UI)
 ───────────────────────────────────────────────────── */
-function initActiveNav() {
+function initNavigation() {
   const sections = qsa('section[id]');
-  const links    = qsa('.nav-link');
+  
+  // Activate home by default
+  activateSection('home');
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const id = e.target.id;
-        links.forEach(l => {
-          l.classList.toggle('active', l.dataset.section === id);
-        });
+  // Use event delegation so mobile menu clones work automatically
+  document.body.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    
+    const id = link.getAttribute('href').replace('#', '');
+    const targetSection = document.getElementById(id);
+    
+    // Only intercept if the target is an actual section
+    if (targetSection && targetSection.tagName.toLowerCase() === 'section') {
+      e.preventDefault();
+      activateSection(id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  function activateSection(id) {
+    sections.forEach(s => s.classList.toggle('active', s.id === id));
+    
+    // Update active state on all matching links
+    qsa('a[href^="#"]').forEach(l => {
+      const linkId = l.getAttribute('href').replace('#', '');
+      if (document.getElementById(linkId) && document.getElementById(linkId).tagName.toLowerCase() === 'section') {
+        l.classList.toggle('active', linkId === id);
       }
     });
-  }, { rootMargin: '-40% 0px -50% 0px' });
 
-  sections.forEach(s => io.observe(s));
+    // Re-trigger reveal animations elegantly by re-observing them
+    const activeSection = qs(`#${id}`);
+    if (activeSection && typeof revealObserver !== 'undefined') {
+      qsa('.reveal', activeSection).forEach(el => {
+        el.classList.remove('is-visible');
+        revealObserver.observe(el);
+      });
+    }
+  }
 }
 
 /* ─────────────────────────────────────────────────────
@@ -633,6 +662,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reveal must run after DOM is set
   requestAnimationFrame(() => {
     initReveal();
-    initActiveNav();
+    initNavigation();
   });
 });
