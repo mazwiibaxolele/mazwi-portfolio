@@ -339,9 +339,12 @@ svg { display: block; }
    SECTION 1 — HOME
 ───────────────────────────────────────────────────── */
 .section-home {
-  display: flex;
   align-items: center;
   padding-top: 100px;
+}
+
+.section-home.active {
+  display: flex;
 }
 
 .home-grid {
