@@ -5,6 +5,17 @@
 ───────────────────────────────────────────────────── */
 const PROJECTS = [
   {
+    id: 4,
+    title: 'StudyPulse Timer (Vibecoded)',
+    summary: 'A premium, AI-integrated study timer built with Antigravity. Designed to provide a valuable, intelligent study session.',
+    tools: ['Antigravity', 'AI Integration', 'Vibecoding', 'UI/UX'],
+    problem: 'I am not a traditional developer, but I have a lot of ideas I wish people built. Existing study timers felt basic and lacked a premium, intelligent user experience. I wanted a premium, valuable AI-integrated study timer.',
+    approach: 'Leveraged Antigravity to vibecode the application. Acted as the visionary, steering the AI to build a deeply minimal, centered UI that integrates AI smoothly into the study workflow.',
+    outcome: 'Successfully built a functional, premium app. I absolutely love the outcome of seeing real results and having my app ideas brought to life instantly without traditional development bottlenecks.',
+    github: '#',
+    image: 'images/project1-a.png',
+  },
+  {
     id: 1,
     title: 'Customer Retention & Churn Analysis',
     summary: 'Analysed 7,032 telecom customers to identify churn patterns. Found a 26.58% overall churn rate, 42.71% churn among month-to-month contract customers, and 47.68% of new customers leaving within year one.',
@@ -40,6 +51,13 @@ const PROJECTS = [
 ];
 
 const EXPERIENCES = [
+  {
+    role: 'Data Visualisation Remote Intern',
+    org: 'Execelerate',
+    period: 'Jun 1 2026 – Jun 28 2026',
+    desc: '4-week remote internship focused primarily on data analysis using SQL and building impactful data visualizations.',
+    skills: ['SQL', 'Data Analysis', 'Data Visualization']
+  },
   {
     role: 'Mentor',
     org: 'WITS School of Construction Economics',
@@ -85,6 +103,16 @@ const EXPERIENCES = [
 ];
 
 const CERTIFICATIONS = [
+  {
+    title: 'ALX Africa Academy Data Engineering',
+    issuer: 'ALX Africa',
+    subs: [
+      'Professional Foundations',
+      'Data Analytics',
+      'Python',
+      'Data Engineering'
+    ]
+  },
   {
     title: 'DataCamp Associate Data Analyst Track',
     issuer: 'DataCamp',
@@ -166,7 +194,7 @@ function initTheme() {
 }
 
 /* ─────────────────────────────────────────────────────
-   SCROLL REVEAL
+   SCROLL REVEAL & TYPEWRITER
 ───────────────────────────────────────────────────── */
 let revealObserver;
 function initReveal() {
@@ -182,6 +210,37 @@ function initReveal() {
   }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
   qsa('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function initTypewriter() {
+  const target = document.getElementById('typewriter-target');
+  if (!target) {
+    initReveal();
+    return;
+  }
+  
+  const text = "hello, Baxolele here";
+  let i = 0;
+  
+  function typeWriter() {
+    if (i < text.length) {
+      target.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 50); // Typing speed
+    } else {
+      // Done typing, reveal the rest of the page!
+      setTimeout(() => {
+        document.querySelectorAll('.reveal-after-type').forEach(el => {
+          el.classList.add('is-visible');
+        });
+        // Start observing scroll reveals after typing completes
+        initReveal(); 
+      }, 200);
+    }
+  }
+  
+  // Start typing after a tiny delay
+  setTimeout(typeWriter, 300);
 }
 
 /* ─────────────────────────────────────────────────────
@@ -221,6 +280,12 @@ function initNavigation() {
         el.classList.remove('is-visible');
         revealObserver.observe(el);
       });
+      // Handle items that might have reveal-after-type inside active section
+      qsa('.reveal-after-type', activeSection).forEach(el => {
+        // If it's the home tab, we should just make them visible if typing is already done
+        // We'll just force them visible here to prevent them disappearing on tab switch
+        el.classList.add('is-visible');
+      });
     }
   }
 }
@@ -257,18 +322,40 @@ function renderTimeline() {
 /* ─────────────────────────────────────────────────────
    RENDER: PROJECTS
 ───────────────────────────────────────────────────── */
+let homeCarouselInterval;
+
 function renderProjects() {
-  // Latest Project on Home Page
+  // Latest Project on Home Page (Cycling Carousel)
   const homeLatest = qs('#home-latest-project');
   if (homeLatest && PROJECTS.length > 0) {
-    const latest = PROJECTS[0];
-    homeLatest.innerHTML = `
-      <img src="${latest.image}" alt="${latest.title}">
-      <div class="latest-card-overlay">
-        <div class="latest-card-title">${latest.title}</div>
-      </div>
-    `;
-    homeLatest.addEventListener('click', () => openProject(latest.id));
+    let currentIndex = 0;
+    
+    function updateFeatured() {
+      const proj = PROJECTS[currentIndex];
+      // Quick fade animation
+      homeLatest.style.opacity = '0';
+      setTimeout(() => {
+        homeLatest.innerHTML = `
+          <img src="${proj.image}" alt="${proj.title}">
+          <div class="latest-card-overlay">
+            <div class="latest-card-title">${proj.title}</div>
+          </div>
+        `;
+        homeLatest.style.opacity = '1';
+        homeLatest.onclick = () => openProject(proj.id);
+      }, 300);
+    }
+    
+    // Smooth transition style
+    homeLatest.style.transition = 'opacity 0.3s ease-in-out';
+    updateFeatured();
+    
+    // Switch every 5 seconds
+    if(homeCarouselInterval) clearInterval(homeCarouselInterval);
+    homeCarouselInterval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % PROJECTS.length;
+      updateFeatured();
+    }, 5000);
   }
 
   // Projects List on Projects Page
@@ -324,7 +411,6 @@ function renderCerts() {
     // Interactions
     header.addEventListener('mouseenter', () => card.classList.add('open'));
     card.addEventListener('mouseleave', () => card.classList.remove('open'));
-    // Fallback for click/mobile
     header.addEventListener('click', () => card.classList.toggle('open'));
     
     card.appendChild(header);
@@ -348,7 +434,7 @@ function openProject(id) {
       ${proj.tools.map(t => `<span class="tl-skill">${t}</span>`).join('')}
     </div>
     
-    <h3>The Problem</h3>
+    <h3>The Problem / Motive</h3>
     <p class="pd-desc">${proj.problem}</p>
     
     <h3>The Approach</h3>
@@ -358,13 +444,13 @@ function openProject(id) {
     <p class="pd-desc">${proj.outcome}</p>
     
     <div style="margin-top: 30px;">
-      <a href="${proj.github}" target="_blank" class="btn-primary">View on GitHub</a>
+      <a href="${proj.github}" target="_blank" class="btn-primary">View Project / GitHub</a>
     </div>
   `;
 
   qs('#project-detail').classList.remove('hidden');
   document.body.style.overflow = 'hidden'; // prevent bg scroll
-  window.scrollTo({ top: 0 }); // Just to be safe, though modal is absolute
+  window.scrollTo({ top: 0 }); // Just to be safe
 }
 
 function closeProjectDetail() {
@@ -390,9 +476,10 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProjects();
   renderCerts();
   initBackBtn();
+  initNavigation();
 
+  // Kick off animations
   requestAnimationFrame(() => {
-    initReveal();
-    initNavigation();
+    initTypewriter(); 
   });
 });

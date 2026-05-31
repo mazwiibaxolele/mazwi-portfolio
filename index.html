@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Minimal Inter font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,7 +18,7 @@
   <nav id="navbar" role="navigation">
     <div class="nav-inner minimal-container">
       <div class="nav-avatar">
-        <img src="images/profile.png" alt="BM">
+        <img src="images/favicon.png" alt="BM">
       </div>
       <div class="nav-links">
         <a href="#home" class="nav-link active">Home</a>
@@ -37,12 +38,12 @@
     
     <!-- ========== HOME ========== -->
     <section id="home" class="section">
-      <div class="home-hero reveal">
-        <h1 class="hero-title">hello, Baxolele here</h1>
-        <p class="hero-subtitle">Construction student at Wits &amp; Data Analytics specialist bridging the gap between site execution and digital strategy.</p>
+      <div class="home-hero">
+        <h1 class="hero-title" id="hero-title"><span id="typewriter-target"></span><span class="cursor">|</span></h1>
+        <p class="hero-subtitle reveal-after-type">Construction student at Wits &amp; Data Analytics specialist bridging the gap between site execution and digital strategy.</p>
       </div>
       
-      <div class="home-latest reveal reveal-delay">
+      <div class="home-latest reveal-after-type">
         <div class="latest-header">
           <h3>Latest Project</h3>
         </div>
@@ -59,14 +60,27 @@
         <p>Who I am.</p>
       </div>
       
-      <div class="photo-fan reveal reveal-delay">
+      <div class="photo-fan reveal">
         <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.png" alt="Civil"></div>
         <div class="fan-img-wrap img-2"><img src="images/exp-mentor.png" alt="Mentor"></div>
         <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Priotech"></div>
         <div class="fan-img-wrap img-4"><img src="images/exp-tutor.png" alt="Tutor"></div>
       </div>
 
-      <div class="timeline-container reveal reveal-delay-2">
+      <div class="about-story reveal">
+        <h3>The Motive</h3>
+        <p>I realized early on that the construction industry is brilliant at executing complex builds, but often struggles with the data side of things—tracking, predicting, and optimizing. That's why I decided to bridge the gap. I combined my background in Construction (BSc at Wits) with Data Analytics and Engineering. I don't just want to build structures; I want to build the data pipelines and visualizations that make building them more efficient, cost-effective, and smart.</p>
+      </div>
+
+      <div class="about-education reveal">
+        <h3>Education</h3>
+        <ul class="edu-list">
+          <li><strong>Bachelor of Science (Construction)</strong> — Wits University</li>
+          <li><strong>Data Engineering & Analytics</strong> — ALX Africa Academy</li>
+        </ul>
+      </div>
+
+      <div class="timeline-container reveal">
         <div class="timeline-header">
           <h3>Timeline</h3>
         </div>

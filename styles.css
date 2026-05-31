@@ -298,6 +298,42 @@ h1, h2, h3, h4 {
 .photo-fan:hover .img-3 { transform: translateX(50px) rotate(5deg); }
 .photo-fan:hover .img-4 { transform: translateX(140px) rotate(15deg); }
 
+/* Story & Education */
+.about-story, .about-education {
+  margin-bottom: 40px;
+  padding: 30px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.about-story h3, .about-education h3 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.about-story p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.edu-list {
+  list-style: none;
+}
+
+.edu-list li {
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.edu-list li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* Timeline */
 .timeline-header {
   display: flex;
@@ -653,20 +689,36 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   ANIMATIONS & MODAL
+   ANIMATIONS, TYPEWRITER & MODAL
    ========================================================================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.reveal {
+/* Typewriter Cursor */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  vertical-align: text-bottom;
+  background-color: var(--text-primary);
+  animation: blink 1s step-end infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.reveal, .reveal-after-type {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.reveal.is-visible {
+.reveal.is-visible, .reveal-after-type.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
