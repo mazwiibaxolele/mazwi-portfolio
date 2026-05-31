@@ -1,83 +1,48 @@
-# Baxolele Mazwi — Personal Portfolio
+# Baxolele Mazwi | Personal Portfolio 🚀
 
-A dark, minimal, academic portfolio website built for Baxolele Mazwi — BSc Construction student at Wits & Data Analytics specialist.
+![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg?style=flat-square)
+![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 
-## 🌐 How to Open
+> A deeply minimal, high-performance personal portfolio built to showcase the intersection of **Construction Management** and **Data Engineering & Analytics**.
 
-Simply open `index.html` in your browser. No server or build step required.
+## 🌐 Live Site
+**Check it out here:** [https://mazwiibaxolele.github.io/mazwi-portfolio/](https://mazwiibaxolele.github.io/mazwi-portfolio/)
 
-For the best experience, use a local development server in VS Code:
-1. Install the **Live Server** extension (Ritwick Dey)
-2. Right-click `index.html` → **Open with Live Server**
+## 📖 About This Repository
+This repository contains the source code for my personal portfolio. The site was built completely from scratch without heavy frameworks to ensure maximum performance, clean code, and a bespoke user experience. 
 
----
+The core philosophy behind this project was **"bridging the gap."** The construction industry is brilliant at executing complex builds but often struggles with data (tracking, predicting, and optimizing). This portfolio serves as a digital resume and project showcase of how I use Data Analytics to build smarter systems for physical infrastructure.
 
-## 📁 Project Structure
+## ✨ Key Technical Features
+* **Dynamic Data Rendering:** All projects, experiences, and certifications are stored as JavaScript objects in `script.js` and rendered dynamically into the DOM, making future updates seamless.
+* **Custom Interaction Logic:** Hand-rolled logic for tabbed navigation, interactive modals, and certification dropdowns.
+* **Scroll Animations:** Integrated `IntersectionObserver` for performant, fluid scroll-reveal animations.
+* **Responsive & Adaptive:** Fully responsive layout with mobile-first media queries and a sleek dark theme.
+* **Zero Dependencies:** Built strictly with Vanilla HTML5, CSS3, and ES6 JavaScript.
 
-```
+## 📂 Project Structure
+```text
 mazwi-portfolio/
-├── index.html          — Main HTML (all 8 sections)
-├── styles.css          — Full design system (dark + light themes)
-├── mobile-nav.css      — Mobile hamburger nav styles
-├── script.js           — All JavaScript (particles, carousel, projects, certs...)
-├── documents/          — Place your PDF files here:
-│   ├── Baxolele_Mazwi_CV.pdf
-│   ├── Recommendation_FutureInterns.pdf
-│   └── AZRA_Confirmation.pdf
-├── images/             — Place your photos here:
-│   └── profile.jpg     — Your profile photo (uncomment the <img> in index.html)
-└── README.md
+├── index.html          # Main HTML structure
+├── styles.css          # Design system, theme variables, and responsive layout
+├── script.js           # Core logic, animations, and data source
+├── documents/          # Downloadable assets (CV, Cover Letter)
+└── images/             # Optimised project and profile images
 ```
 
----
+## 🛠️ How to Run Locally
+Because this project uses pure Vanilla JS/HTML/CSS, no build step or package manager is required.
 
-## 🖼️ Adding Your Profile Photo
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mazwiibaxolele/mazwi-portfolio.git
+   ```
+2. Open the directory in your preferred code editor (e.g., VS Code).
+3. Start a local server (if using VS Code, use the **Live Server** extension).
+4. Navigate to `http://localhost:5500`.
 
-1. Save your photo as `images/profile.jpg`
-2. Open `index.html` and find the avatar section (~line 70)
-3. Uncomment the `<img>` tag and comment out the initials `<span>`
-
----
-
-## 📄 Adding Your Documents
-
-Place your PDF files in the `documents/` folder with these exact names:
-- `Baxolele_Mazwi_CV.pdf`
-- `Recommendation_FutureInterns.pdf`
-- `AZRA_Confirmation.pdf`
-
----
-
-## 📸 Adding Project Screenshots
-
-In `script.js`, find the `openProjectDetail` function. The two screenshot placeholders show when a project detail page opens. Replace the placeholder HTML with `<img>` tags pointing to your screenshot files.
-
----
-
-## 🎨 Design System
-
-| Token | Value |
-|-------|-------|
-| Heading font | Crimson Pro (serif) |
-| Body font | Atkinson Hyperlegible |
-| Accent colour | `#e8800a` (orange — **name only**) |
-| Dark bg | `#0d0d0f` |
-| Light bg | `#f4f1eb` (warm parchment) |
-| Glass blur | `20px` |
-
----
-
-## ✅ Sections
-
-| # | Section | Description |
-|---|---------|-------------|
-| — | Nav | Fixed pill nav + theme toggle |
-| 1 | Home | Typewriter name, avatar, social links |
-| 2 | About | Story + info card |
-| 3 | Projects | 5 projects with full detail pages |
-| 4 | Experience | Horizontal carousel (6 roles) |
-| 5 | Skills | Grouped skill pills (3 categories) |
-| 6 | Certifications | Tabbed grid (IBM / DataCamp / Microsoft / Other) |
-| 7 | Documents | Downloads + drag-and-drop upload |
-| 8 | Contact | Link cards + email CTA |
-| — | Footer | Name · Copyright · Social links |
+## 📬 Connect With Me
+* **LinkedIn:** [Baxolele Mazwi](https://www.linkedin.com/in/baxolele-mazwi-25867a216)
+* **Email:** [mazwiibaxolele@gmail.com](mailto:mazwiibaxolele@gmail.com)
