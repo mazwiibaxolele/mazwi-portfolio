@@ -802,7 +802,15 @@ h1, h2, h3, h4 {
 /* Responsive */
 @media (max-width: 600px) {
   .nav-links {
-    display: none; /* Hide standard links on mobile to simplify */
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .nav-link {
+    font-size: 0.85rem;
+  }
+  .nav-avatar {
+    display: none; /* Hide avatar on mobile to make room for links */
   }
   .contact-grid {
     grid-template-columns: 1fr;
