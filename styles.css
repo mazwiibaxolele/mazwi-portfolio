@@ -210,30 +210,6 @@ h1, h2, h3, h4 {
   max-width: 90%;
 }
 
-.hero-open-roles {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  margin-top: 8px;
-  margin-bottom: 12px;
-}
-
-.btn-micro {
-  display: inline-block;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.btn-micro:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--border-hover);
-}
-
 .latest-header {
   display: flex;
   justify-content: space-between;
