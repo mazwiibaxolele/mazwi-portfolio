@@ -462,10 +462,41 @@ function closeProjectDetail() {
 
 function initBackBtn() {
   qs('#back-btn').addEventListener('click', closeProjectDetail);
+  
+  // Close on Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !qs('#project-detail').classList.contains('hidden')) {
       closeProjectDetail();
     }
+  });
+  
+  // Close when clicking the overlay area (outside detail-inner)
+  qs('#project-detail').addEventListener('click', e => {
+    if (e.target === qs('#project-detail')) {
+      closeProjectDetail();
+    }
+  });
+}
+
+/* ─────────────────────────────────────────────────────
+   MOBILE HAMBURGER
+───────────────────────────────────────────────────── */
+function initHamburger() {
+  const btn = qs('#nav-hamburger');
+  const drawer = qs('#mobile-nav');
+  if (!btn || !drawer) return;
+
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+
+  // Close drawer when a link is clicked
+  qsa('.nav-link', drawer).forEach(link => {
+    link.addEventListener('click', () => {
+      btn.classList.remove('open');
+      drawer.classList.remove('open');
+    });
   });
 }
 
@@ -479,9 +510,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCerts();
   initBackBtn();
   initNavigation();
+  initHamburger();
 
   // Kick off animations
   requestAnimationFrame(() => {
     initTypewriter(); 
   });
 });
+

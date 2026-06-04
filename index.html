@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Baxolele Mazwi — Construction student at Wits & Data Analytics specialist. BSc Construction · Data Analytics. Portfolio of projects, experience, and skills." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Baxolele Mazwi — Portfolio" />
+  <meta property="og:description" content="BSc Construction at Wits & Data Analytics specialist. Projects, experience, and certifications." />
+  <meta property="og:image" content="images/profile.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Baxolele Mazwi — Portfolio" />
+  <meta name="twitter:description" content="BSc Construction at Wits & Data Analytics specialist." />
+  <meta name="twitter:image" content="images/profile.png" />
   <title>Baxolele Mazwi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,11 +20,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile-nav.css" />
 </head>
 <body>
+  <!-- Skip to content for accessibility -->
+  <a href="#home" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;">Skip to content</a>
 
   <!-- NAVIGATION -->
-  <nav id="navbar" role="navigation">
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner minimal-container">
       <div class="nav-avatar">
         <img src="images/favicon.png" alt="BM">
@@ -31,8 +43,19 @@
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
+      <button id="nav-hamburger" class="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <!-- Mobile nav drawer -->
+  <div id="mobile-nav" class="mobile-nav">
+    <a href="#home" class="nav-link active">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#certifications" class="nav-link">Certifications</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
 
   <main class="main-content minimal-container">
     
@@ -65,10 +88,10 @@
       </div>
       
       <div class="photo-fan reveal">
-        <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.png" alt="Civil"></div>
-        <div class="fan-img-wrap img-2"><img src="images/exp-mentor.png" alt="Mentor"></div>
-        <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Priotech"></div>
-        <div class="fan-img-wrap img-4"><img src="images/exp-tutor.png" alt="Tutor"></div>
+        <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.png" alt="Civil" loading="lazy"></div>
+        <div class="fan-img-wrap img-2"><img src="images/exp-mentor.png" alt="Mentor" loading="lazy"></div>
+        <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Priotech" loading="lazy"></div>
+        <div class="fan-img-wrap img-4"><img src="images/exp-tutor.png" alt="Tutor" loading="lazy"></div>
       </div>
 
       <div class="about-story reveal">
@@ -130,8 +153,8 @@
     <!-- ========== CONTACT ========== -->
     <section id="contact" class="section">
       <div class="contact-hero reveal">
-        <img src="images/profile.png" alt="Baxolele" class="contact-avatar">
-        <p class="contact-funny-bio">just a construction guy obsessed with data, trying to build smart systems without losing his mind. <br><br> Highly recommend checking out <a href="https://study-pulse-liard.vercel.app/auth" target="_blank" style="color:var(--text-primary); text-decoration:underline;">StudyPulse</a> — my AI-integrated study timer to stop you from studying blindly.</p>
+        <img src="images/profile.png" alt="Baxolele" class="contact-avatar" loading="lazy">
+        <p class="contact-funny-bio">just a construction guy obsessed with data, trying to build smart systems without losing his mind. <br><br> Highly recommend checking out <a href="https://study-pulse-liard.vercel.app/auth" target="_blank" rel="noopener noreferrer" style="color:var(--text-primary); text-decoration:underline;">StudyPulse</a> — my AI-integrated study timer to stop you from studying blindly.</p>
       </div>
 
       <div class="section-header reveal reveal-delay">
@@ -147,28 +170,28 @@
             <span class="cp-val">mazwiibaxolele@gmail.com</span>
           </div>
         </a>
-        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" class="contact-pill">
+        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener noreferrer" class="contact-pill">
           <div class="cp-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
           <div class="cp-info">
             <span class="cp-title">LinkedIn</span>
             <span class="cp-val">in/baxolele-mazwi</span>
           </div>
         </a>
-        <a href="https://github.com/mazwiibaxolele" target="_blank" class="contact-pill">
+        <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener noreferrer" class="contact-pill">
           <div class="cp-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
           <div class="cp-info">
             <span class="cp-title">GitHub</span>
             <span class="cp-val">mazwiibaxolele</span>
           </div>
         </a>
-        <a href="https://x.com/baxlle" target="_blank" class="contact-pill">
+        <a href="https://x.com/baxlle" target="_blank" rel="noopener noreferrer" class="contact-pill">
           <div class="cp-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
           <div class="cp-info">
             <span class="cp-title">X (Twitter)</span>
             <span class="cp-val">@baxlle</span>
           </div>
         </a>
-        <a href="https://www.instagram.com/bax.lle/" target="_blank" class="contact-pill">
+        <a href="https://www.instagram.com/bax.lle/" target="_blank" rel="noopener noreferrer" class="contact-pill">
           <div class="cp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
           <div class="cp-info">
             <span class="cp-title">Instagram</span>
@@ -197,11 +220,11 @@
   <footer class="site-footer">
     <div class="minimal-container footer-inner">
       <div class="footer-socials">
-        <a href="https://github.com/mazwiibaxolele" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="https://x.com/baxlle" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://www.instagram.com/bax.lle/" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="mailto:mazwiibaxolele@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        <a href="https://github.com/mazwiibaxolele" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        <a href="https://linkedin.com/in/baxolele-mazwi-9b2322267" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://x.com/baxlle" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/bax.lle/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="mailto:mazwiibaxolele@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
       </div>
       <p>&copy; 2026 Baxolele Mazwi.</p>
     </div>
