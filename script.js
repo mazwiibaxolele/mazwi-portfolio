@@ -105,38 +105,40 @@ const EXPERIENCES = [
 
 const CERTIFICATIONS = [
   {
-    title: 'ALX Africa Academy Data Engineering',
-    issuer: 'ALX Africa',
-    subs: []
-  },
-  {
     title: 'Data Analyst Associate',
     issuer: 'DataCamp',
-    subs: [
-      'Credential ID: DAA0017949742800 — Jun 2026'
-    ]
+    credentialId: 'DAA0017949742800',
+    link: 'https://www.datacamp.com/certificate/DAA0017949742800'
   },
   {
     title: 'Data Engineer Associate',
     issuer: 'DataCamp',
-    subs: [
-      'Credential ID: DEA0011274287496 — Jun 2026'
-    ]
+    credentialId: 'DEA0011274287496',
+    link: 'https://www.datacamp.com/certificate/DEA0011274287496'
+  },
+  {
+    title: 'ALX Africa Academy Data Engineering',
+    issuer: 'ALX Africa',
+    credentialId: '3z2JCsx5Fy',
+    link: 'https://savanna.alxafrica.com/certificates/3z2JCsx5Fy'
   },
   {
     title: 'IBM Data Analyst Professional',
     issuer: 'IBM',
-    subs: []
+    credentialId: '8QBWSDZZOGDQ',
+    link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/8QBWSDZZOGDQ'
   },
   {
     title: 'Microsoft Certifications (SQL Foundations)',
     issuer: 'Microsoft',
-    subs: []
+    credentialId: 'Y0UXIBLA0J49',
+    link: 'https://www.coursera.org/account/accomplishments/verify/Y0UXIBLA0J49'
   },
   {
-    title: 'WinQS Quantity Surveying System',
-    issuer: 'ACE Solutions',
-    subs: []
+    title: 'The introduction to and effective use of the WinQS Quantity Surveying System',
+    issuer: 'ACE Solutions (WinQS)',
+    credentialId: '6810ef1004de31ea31061ec7',
+    link: null
   }
 ];
 
@@ -373,34 +375,34 @@ function renderCerts() {
     const card = createEl('div', { className: 'cert-card reveal', style: `transition-delay: ${idx * 0.05}s` });
     
     // Header
-    const header = createEl('div', { className: 'cert-header' },
+    const header = createEl('div', { className: 'cert-header', style: 'cursor: default; padding-bottom: 10px;' },
       createEl('div', { className: 'cert-info' },
         createEl('div', { className: 'cert-title' }, cert.title),
         createEl('div', { className: 'cert-issuer' }, cert.issuer)
       )
     );
+    card.appendChild(header);
     
-    if (cert.subs && cert.subs.length > 0) {
-      header.appendChild(createEl('div', { className: 'cert-chevron', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>' }));
-      
-      // Body (Subs)
-      const body = createEl('div', { className: 'cert-body' });
-      const subList = createEl('div', { className: 'subcert-list' });
-      cert.subs.forEach(sub => {
-        subList.appendChild(createEl('div', { className: 'subcert-item' }, sub));
-      });
-      body.appendChild(subList);
-      
-      // Interactions
-      header.addEventListener('mouseenter', () => card.classList.add('open'));
-      card.addEventListener('mouseleave', () => card.classList.remove('open'));
-      header.addEventListener('click', () => card.classList.toggle('open'));
-      
-      card.appendChild(header);
-      card.appendChild(body);
+    const credText = cert.credentialId ? `Credential ID ${cert.credentialId}` : '';
+    
+    if (credText) {
+      const credContainer = createEl('div', { style: 'padding: 0 20px 20px 20px; background: var(--bg-secondary);' });
+      if (cert.link) {
+          const linkEl = createEl('a', { 
+            href: cert.link, 
+            target: '_blank', 
+            rel: 'noopener noreferrer', 
+            style: 'color: var(--text-secondary); text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 5px;', 
+            html: `${credText} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>` 
+          });
+          credContainer.appendChild(linkEl);
+      } else {
+          const textEl = createEl('span', { style: 'color: var(--text-secondary); font-size: 0.95rem;' }, credText);
+          credContainer.appendChild(textEl);
+      }
+      card.appendChild(credContainer);
     } else {
-      header.style.cursor = 'default';
-      card.appendChild(header);
+      header.style.paddingBottom = '20px';
     }
     
     container.appendChild(card);
