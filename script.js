@@ -115,18 +115,20 @@ const CERTIFICATIONS = [
     ]
   },
   {
-    title: 'DataCamp Associate Data Analyst Track',
+    title: 'Data Analyst Associate',
     issuer: 'DataCamp',
     subs: [
+      'Credential ID: DAA0017949742800 — Jun 2026',
       'Introduction to Power BI — Feb 2026',
       'Exploratory Data Analysis in SQL — Feb 2026',
       'Intermediate SQL — May 2025'
     ]
   },
   {
-    title: 'DataCamp Associate Data Engineering',
+    title: 'Data Engineer Associate',
     issuer: 'DataCamp',
     subs: [
+      'Credential ID: DEA0011274287496 — Jun 2026',
       'Understanding Data Engineering — May 2026',
       'Introduction to Data Literacy — May 2026'
     ]
