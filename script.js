@@ -107,58 +107,36 @@ const CERTIFICATIONS = [
   {
     title: 'ALX Africa Academy Data Engineering',
     issuer: 'ALX Africa',
-    subs: [
-      'Professional Foundations',
-      'Data Analytics',
-      'Python',
-      'Data Engineering'
-    ]
+    subs: []
   },
   {
     title: 'Data Analyst Associate',
     issuer: 'DataCamp',
     subs: [
-      'Credential ID: DAA0017949742800 — Jun 2026',
-      'Introduction to Power BI — Feb 2026',
-      'Exploratory Data Analysis in SQL — Feb 2026',
-      'Intermediate SQL — May 2025'
+      'Credential ID: DAA0017949742800 — Jun 2026'
     ]
   },
   {
     title: 'Data Engineer Associate',
     issuer: 'DataCamp',
     subs: [
-      'Credential ID: DEA0011274287496 — Jun 2026',
-      'Understanding Data Engineering — May 2026',
-      'Introduction to Data Literacy — May 2026'
+      'Credential ID: DEA0011274287496 — Jun 2026'
     ]
   },
   {
     title: 'IBM Data Analyst Professional',
     issuer: 'IBM',
-    subs: [
-      'Data Analysis with Python — Dec 2025',
-      'Data Visualization with Python — Jan 2026',
-      'Databases & SQL for Data Science — Dec 2025',
-      'Python for Data Science, AI & Dev — Jul 2025',
-      'Excel Basics for Data Analysis — Nov 2025',
-      'Intro to Data Analytics — Nov 2025',
-      'Generative AI: Enhance Career — Jan 2026'
-    ]
+    subs: []
   },
   {
-    title: 'Microsoft Certifications',
+    title: 'Microsoft Certifications (SQL Foundations)',
     issuer: 'Microsoft',
-    subs: [
-      'SQL Foundations — Dec 2025'
-    ]
+    subs: []
   },
   {
     title: 'WinQS Quantity Surveying System',
     issuer: 'ACE Solutions',
-    subs: [
-      'WinQS System — Apr 2025'
-    ]
+    subs: []
   }
 ];
 
@@ -399,25 +377,32 @@ function renderCerts() {
       createEl('div', { className: 'cert-info' },
         createEl('div', { className: 'cert-title' }, cert.title),
         createEl('div', { className: 'cert-issuer' }, cert.issuer)
-      ),
-      createEl('div', { className: 'cert-chevron', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>' })
+      )
     );
     
-    // Body (Subs)
-    const body = createEl('div', { className: 'cert-body' });
-    const subList = createEl('div', { className: 'subcert-list' });
-    cert.subs.forEach(sub => {
-      subList.appendChild(createEl('div', { className: 'subcert-item' }, sub));
-    });
-    body.appendChild(subList);
+    if (cert.subs && cert.subs.length > 0) {
+      header.appendChild(createEl('div', { className: 'cert-chevron', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>' }));
+      
+      // Body (Subs)
+      const body = createEl('div', { className: 'cert-body' });
+      const subList = createEl('div', { className: 'subcert-list' });
+      cert.subs.forEach(sub => {
+        subList.appendChild(createEl('div', { className: 'subcert-item' }, sub));
+      });
+      body.appendChild(subList);
+      
+      // Interactions
+      header.addEventListener('mouseenter', () => card.classList.add('open'));
+      card.addEventListener('mouseleave', () => card.classList.remove('open'));
+      header.addEventListener('click', () => card.classList.toggle('open'));
+      
+      card.appendChild(header);
+      card.appendChild(body);
+    } else {
+      header.style.cursor = 'default';
+      card.appendChild(header);
+    }
     
-    // Interactions
-    header.addEventListener('mouseenter', () => card.classList.add('open'));
-    card.addEventListener('mouseleave', () => card.classList.remove('open'));
-    header.addEventListener('click', () => card.classList.toggle('open'));
-    
-    card.appendChild(header);
-    card.appendChild(body);
     container.appendChild(card);
   });
 }
