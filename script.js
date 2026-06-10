@@ -53,53 +53,67 @@ const PROJECTS = [
 
 const EXPERIENCES = [
   {
-    role: 'Data Visualisation Remote Intern',
-    org: 'Execelerate',
-    period: 'Jun 1 2026 – Jun 28 2026',
-    desc: '4-week remote internship focused primarily on data analysis using SQL and building impactful data visualizations.',
-    skills: ['SQL', 'Data Analysis', 'Data Visualization']
-  },
-  {
     role: 'Mentor',
-    org: 'WITS School of Construction Economics',
+    org: 'WITS School of Construction Economics and Management',
     period: 'Apr 2026 – Present',
     desc: 'Mentoring students within the Construction Economics and Management faculty at Wits, supporting their academic development and professional preparation.',
     skills: ['Mentoring', 'Academic Support', 'Construction Economics']
   },
   {
-    role: 'Quantities & Specification Tutor',
+    role: 'Quantities and Specification || Tutor',
     org: 'ASAQS',
-    period: 'Feb 2026 – Present',
+    period: 'Feb 2026 – Jun 2026',
     desc: 'Tutoring students in quantities and specification as part of the ASAQS programme, helping candidates develop technical proficiency in core surveying competencies.',
     skills: ['Quantity Surveying', 'Specification', 'Teaching']
   },
   {
-    role: 'Data Analytics Intern',
-    org: 'Future Interns',
-    period: 'Apr 2026',
-    desc: 'Completed three end-to-end analytics projects covering business sales performance, customer churn analysis, and marketing funnel evaluation.',
-    skills: ['Python', 'SQL', 'Power BI', 'Data Analysis']
-  },
-  {
-    role: 'Student Intern — Civil Construction',
-    org: 'AZRA Developments',
-    period: 'Jun 2025 – Jul 2025',
-    desc: 'Supported delivery of roadworks and retaining walls. Conducted GNSS-based engineering surveying, assisted with trench preparation.',
-    skills: ['Surveying', 'Trench Prep', 'Traffic Accommodation']
-  },
-  {
-    role: 'CIOB Subcommittee Treasurer',
-    org: 'Chartered Institute of Building',
-    period: 'Feb 2025 – Oct 2025',
-    desc: 'Managed financial accounts for the CIOB subcommittee, overseeing budget tracking and financial reporting for the Africa Novus student chapter.',
+    role: 'Subcom (Treasurer) | Wits',
+    org: 'The Chartered Institute of Building (CIOB)',
+    period: 'Feb 2025 – Nov 2025',
+    desc: 'Served as Treasurer of the CIOB Africa Novus Subcommittee at Wits, responsible for managing finances, tracking expenditure, and supporting financial planning of student chapter activities. Developed financial accountability and organisational discipline.',
     skills: ['Budget Tracking', 'Financial Reporting', 'Leadership']
+  },
+  {
+    role: 'Member',
+    org: 'The Chartered Institute of Building (CIOB)',
+    period: 'Feb 2025 – Oct 2025',
+    desc: 'As part of being the CIOB Africa Novus Subcommittee Treasurer at Wits, I got the opportunity to be a CIOB member.',
+    skills: ['Professional Institution', 'Networking']
+  },
+  {
+    role: 'Soup Kitchen (Volunteer-WCCO)',
+    org: 'University of the Witwatersrand',
+    period: 'Feb 2025 – Oct 2025',
+    desc: 'Volunteered with the Wits Community Citizenship Organisation, contributing to food preparation and distribution at a campus soup kitchen. Developed teamwork, reliability, and a practical commitment to community service.',
+    skills: ['Community Service', 'Teamwork', 'Reliability']
+  },
+  {
+    role: 'Marketing Team (EBESC-subcomm)',
+    org: 'University of the Witwatersrand',
+    period: 'Feb 2025 – Oct 2025',
+    desc: 'Contributed to the marketing and communications work of the Engineering and Built Environment Student Council subcommittee. Supported content creation, event promotion, and outreach activities.',
+    skills: ['Marketing', 'Communications', 'Content Creation']
+  },
+  {
+    role: 'Mentor (CEM)',
+    org: 'WITS School of Construction Economics and Management',
+    period: 'Feb 2025 – Oct 2025',
+    desc: 'Mentoring students within the faculty, supporting their academic development.',
+    skills: ['Mentoring', 'Academic Support']
+  },
+  {
+    role: 'Student Intern',
+    org: 'AZRA DEVELOPMENTS',
+    period: 'Jun 2025 – Jul 2025',
+    desc: 'Supported on-site delivery of roadworks and retaining walls. Conducted manual and GNSS-based surveying, assisted with trench preparation and traffic accommodation. Documented construction process on LinkedIn.',
+    skills: ['Surveying', 'Trench Prep', 'Traffic Accommodation']
   },
   {
     role: 'Student Intern',
     org: 'Priotech Projects',
     period: 'Jun 2024',
-    desc: 'Assisted with project coordination, progress tracking, and site reporting — gaining exposure to construction project management in an active site environment.',
-    skills: ['Project Coordination', 'Site Reporting', 'Construction Management']
+    desc: 'Assisted with project coordination, progress tracking, and reporting. Supported preparation of documentation and daily summaries. Gained exposure to planning, risk considerations, and decision-making processes.',
+    skills: ['Project Coordination', 'Progress Tracking', 'Documentation']
   }
 ];
 
