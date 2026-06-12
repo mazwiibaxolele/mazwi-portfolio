@@ -167,6 +167,7 @@ function createEl(tag, attrs = {}, ...children) {
   Object.entries(attrs).forEach(([k, v]) => {
     if (k === 'className') el.className = v;
     else if (k === 'html') el.innerHTML = v;
+    else if (k === 'style') el.style.cssText = v;
     else el.setAttribute(k, v);
   });
   children.forEach(c => { if (c) el.append(typeof c === 'string' ? document.createTextNode(c) : c); });
@@ -448,8 +449,8 @@ function openProject(id) {
     <p class="pd-desc">${proj.outcome}</p>
     
     <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
-      ${proj.appLink ? `<a href="${proj.appLink}" target="_blank" class="btn-primary">View Live App</a>` : ''}
-      <a href="${proj.github}" target="_blank" class="btn-primary">View GitHub</a>
+      ${proj.appLink ? `<a href="${proj.appLink}" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live App</a>` : ''}
+      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-primary">View GitHub</a>
     </div>
   `;
 

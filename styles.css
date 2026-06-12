@@ -530,7 +530,6 @@ h1, h2, h3, h4 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   background: var(--bg-secondary);
 }
 
