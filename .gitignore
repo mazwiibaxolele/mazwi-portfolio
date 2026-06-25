@@ -14,3 +14,20 @@ desktop.ini
 # Temp
 *.tmp
 *.log
+
+# Environment / Secrets
+.env
+.env.*
+*.pem
+*.key
+*.cert
+*.p12
+
+# Node (if ever added)
+node_modules/
+package-lock.json
+
+# Backups
+*.bak
+*.swp
+*~
