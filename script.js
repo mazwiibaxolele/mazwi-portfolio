@@ -157,8 +157,8 @@ const CERTIFICATIONS = [
 ];
 
 const TIKTOK_PROFILE = {
-  handle: 'baxlle',
-  profileUrl: 'https://www.tiktok.com/@baxlle',
+  handle: 'bax.lle',
+  profileUrl: 'https://www.tiktok.com/@bax.lle',
 };
 
 /* ─────────────────────────────────────────────────────
