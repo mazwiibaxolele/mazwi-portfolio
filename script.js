@@ -156,6 +156,11 @@ const CERTIFICATIONS = [
   }
 ];
 
+const TIKTOK_PROFILE = {
+  handle: 'baxlle',
+  profileUrl: 'https://www.tiktok.com/@baxlle',
+};
+
 /* ─────────────────────────────────────────────────────
    UTILITY
 ───────────────────────────────────────────────────── */
@@ -172,6 +177,12 @@ function createEl(tag, attrs = {}, ...children) {
   });
   children.forEach(c => { if (c) el.append(typeof c === 'string' ? document.createTextNode(c) : c); });
   return el;
+}
+
+function createSkillTags(skills, className = 'tl-skills') {
+  const wrap = createEl('div', { className });
+  skills.forEach(skill => wrap.appendChild(createEl('span', { className: 'tl-skill' }, skill)));
+  return wrap;
 }
 
 /* ─────────────────────────────────────────────────────
@@ -222,7 +233,7 @@ function initTypewriter() {
   
   function typeWriter() {
     if (i < text.length) {
-      target.innerHTML += text.charAt(i);
+      target.textContent += text.charAt(i);
       i++;
       setTimeout(typeWriter, 50); // Typing speed
     } else {
@@ -297,8 +308,6 @@ function renderTimeline() {
   
   container.innerHTML = '';
   EXPERIENCES.forEach(exp => {
-    const skillsHtml = exp.skills.map(s => `<span class="tl-skill">${s}</span>`).join('');
-    
     const el = createEl('div', { className: 'tl-item reveal' },
       createEl('div', { className: 'tl-left' },
         createEl('div', { className: 'tl-date' }, exp.period)
@@ -310,7 +319,7 @@ function renderTimeline() {
         createEl('div', { className: 'tl-company' }, exp.org),
         createEl('div', { className: 'tl-role' }, exp.role),
         createEl('div', { className: 'tl-desc' }, exp.desc),
-        createEl('div', { className: 'tl-skills', html: skillsHtml })
+        createSkillTags(exp.skills)
       )
     );
     container.appendChild(el);
@@ -320,60 +329,81 @@ function renderTimeline() {
 /* ─────────────────────────────────────────────────────
    RENDER: PROJECTS
 ───────────────────────────────────────────────────── */
-let homeCarouselInterval;
+function loadTikTokEmbed() {
+  const existing = document.querySelector('script[data-tiktok-embed]');
+  if (existing) return;
+
+  const script = document.createElement('script');
+  script.src = 'https://www.tiktok.com/embed.js';
+  script.async = true;
+  script.dataset.tiktokEmbed = 'true';
+  document.body.appendChild(script);
+}
+
+function renderTikTokSpotlight() {
+  const container = qs('#home-tiktok-feed');
+  if (!container) return;
+
+  const profileLink = createEl('a', {
+    href: TIKTOK_PROFILE.profileUrl,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  }, `@${TIKTOK_PROFILE.handle}`);
+
+  const fallback = createEl('section', { className: 'tiktok-fallback' },
+    createEl('p', {}, 'Loading latest TikTok posts from '),
+    profileLink,
+    createEl('span', {}, '.')
+  );
+
+  const embed = createEl('blockquote', {
+    className: 'tiktok-embed',
+    cite: TIKTOK_PROFILE.profileUrl,
+    'data-unique-id': TIKTOK_PROFILE.handle,
+    'data-embed-type': 'creator',
+  }, fallback);
+
+  container.replaceChildren(embed);
+
+  const observer = new IntersectionObserver((entries, instance) => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    loadTikTokEmbed();
+    instance.disconnect();
+  }, { rootMargin: '240px 0px' });
+
+  observer.observe(container);
+}
 
 function renderProjects() {
-  // Latest Project on Home Page (Cycling Carousel)
-  const homeLatest = qs('#home-latest-project');
-  if (homeLatest && PROJECTS.length > 0) {
-    let currentIndex = 0;
-    
-    function updateFeatured() {
-      const proj = PROJECTS[currentIndex];
-      // Quick fade animation
-      homeLatest.style.opacity = '0';
-      setTimeout(() => {
-        homeLatest.innerHTML = `
-          <img src="${proj.image}" alt="${proj.title}">
-          <div class="latest-card-overlay">
-            <div class="latest-card-title">${proj.title}</div>
-          </div>
-        `;
-        homeLatest.style.opacity = '1';
-        homeLatest.onclick = () => openProject(proj.id);
-      }, 300);
-    }
-    
-    // Smooth transition style
-    homeLatest.style.transition = 'opacity 0.3s ease-in-out';
-    updateFeatured();
-    
-    // Switch every 5 seconds
-    if(homeCarouselInterval) clearInterval(homeCarouselInterval);
-    homeCarouselInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % PROJECTS.length;
-      updateFeatured();
-    }, 5000);
-  }
-
   // Projects List on Projects Page
   const list = qs('#projects-list');
   if(!list) return;
   
   list.innerHTML = '';
   PROJECTS.forEach(proj => {
-    const el = createEl('div', { className: 'project-item reveal' });
-    el.innerHTML = `
-      <img src="${proj.image}" alt="${proj.title}" class="proj-thumb">
-      <div class="proj-content">
-        <div class="proj-title">${proj.title}</div>
-        <div class="proj-desc">${proj.summary}</div>
-        <div class="tl-skills">
-          ${proj.tools.map(t => `<span class="tl-skill">${t}</span>`).join('')}
-        </div>
-      </div>
-    `;
+    const el = createEl('div', {
+      className: 'project-item reveal',
+      role: 'button',
+      tabindex: '0',
+    },
+      createEl('img', {
+        src: proj.image,
+        alt: proj.title,
+        className: 'proj-thumb',
+        loading: 'lazy',
+      }),
+      createEl('div', { className: 'proj-content' },
+        createEl('div', { className: 'proj-title' }, proj.title),
+        createEl('div', { className: 'proj-desc' }, proj.summary),
+        createSkillTags(proj.tools)
+      )
+    );
     el.addEventListener('click', () => openProject(proj.id));
+    el.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openProject(proj.id);
+    });
     list.appendChild(el);
   });
 }
@@ -510,6 +540,7 @@ function initHamburger() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   renderTimeline();
+  renderTikTokSpotlight();
   renderProjects();
   renderCerts();
   initBackBtn();
@@ -521,4 +552,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initTypewriter(); 
   });
 });
-

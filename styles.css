@@ -259,6 +259,44 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+.home-tiktok {
+  margin-top: 32px;
+}
+
+.tiktok-card {
+  min-height: 430px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.tiktok-card .tiktok-embed {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  border: 0;
+}
+
+.tiktok-fallback {
+  min-height: 430px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 24px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.tiktok-fallback a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ==========================================================================
    ABOUT & TIMELINE
    ========================================================================== */
@@ -833,6 +871,10 @@ h1, h2, h3, h4 {
   }
   .photo-fan {
     transform: scale(0.8);
+  }
+  .tiktok-card,
+  .tiktok-fallback {
+    min-height: 360px;
   }
 }
 
