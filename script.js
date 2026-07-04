@@ -201,12 +201,12 @@ function initTheme() {
 }
 
 /* ─────────────────────────────────────────────────────
-   SCROLL REVEAL & TYPEWRITER
+   SCROLL REVEAL & HERO INTRO
 ───────────────────────────────────────────────────── */
 let revealObserver;
 function initReveal() {
   if (revealObserver) revealObserver.disconnect();
-  
+
   revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -219,43 +219,42 @@ function initReveal() {
   qsa('.reveal').forEach(el => revealObserver.observe(el));
 }
 
-function initTypewriter() {
-  const target = document.getElementById('typewriter-target');
-  if (!target) {
-    initReveal();
-    return;
-  }
+function initHeroIntro() {
+  // Trigger the staggered .h-reveal choreography (delays live in CSS via --d)
+  document.body.classList.add('loaded');
+  initReveal();
 
-  const text = "hello, Baxolele here";
-  let i = 0;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Respect reduced-motion: show everything instantly, no typing animation
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    target.textContent = text;
-    qsa('.reveal-after-type').forEach(el => el.classList.add('is-visible'));
-    initReveal();
-    return;
-  }
-
-  function typeWriter() {
-    if (i < text.length) {
-      target.textContent += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 50); // Typing speed
-    } else {
-      // Done typing, reveal the rest of the page!
-      setTimeout(() => {
-        document.querySelectorAll('.reveal-after-type').forEach(el => {
-          el.classList.add('is-visible');
-        });
-        // Start observing scroll reveals after typing completes
-        initReveal(); 
-      }, 200);
+  // Count-up on the recruiter stats
+  qsa('.stat-num[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count, 10);
+    if (reduce || !Number.isFinite(target)) {
+      el.textContent = target;
+      return;
     }
-  }
-  
-  // Start typing after a tiny delay
-  setTimeout(typeWriter, 300);
+    const duration = 1400;
+    const start = performance.now() + 500; // let the card fade in first
+    function tick(now) {
+      const p = Math.min(Math.max((now - start) / duration, 0), 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* Pointer-tracked specular glow on glass cards */
+function initGlassGlow() {
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.body.addEventListener('pointermove', (e) => {
+    const card = e.target.closest('.project-item, .contact-pill, .cert-card, .stat');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  });
 }
 
 /* ─────────────────────────────────────────────────────
@@ -295,16 +294,10 @@ function initNavigation() {
     });
 
     const activeSection = qs(`#${id}`);
-    if (activeSection && typeof revealObserver !== 'undefined') {
+    if (activeSection && revealObserver) {
       qsa('.reveal', activeSection).forEach(el => {
         el.classList.remove('is-visible');
         revealObserver.observe(el);
-      });
-      // Handle items that might have reveal-after-type inside active section
-      qsa('.reveal-after-type', activeSection).forEach(el => {
-        // If it's the home tab, we should just make them visible if typing is already done
-        // We'll just force them visible here to prevent them disappearing on tab switch
-        el.classList.add('is-visible');
       });
     }
   }
@@ -574,9 +567,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackBtn();
   initNavigation();
   initHamburger();
+  initGlassGlow();
 
   // Kick off animations
   requestAnimationFrame(() => {
-    initTypewriter(); 
+    initHeroIntro();
   });
 });
