@@ -325,25 +325,75 @@ function renderTimeline() {
 /* ─────────────────────────────────────────────────────
    RENDER: PROJECTS
 ───────────────────────────────────────────────────── */
+const TIKTOK_POSTS = [
+  {
+    id: '7592475809793740053',
+    url: 'https://www.tiktok.com/@bax.lle/photo/7592475809793740053',
+    title: 'Latest Post'
+  },
+  {
+    id: '7620013492417891591',
+    url: 'https://www.tiktok.com/@bax.lle/video/7620013492417891591',
+    title: 'Featured Video'
+  },
+  {
+    id: '7623805220874620168',
+    url: 'https://www.tiktok.com/@bax.lle/video/7623805220874620168',
+    title: 'Recent Upload'
+  }
+];
+
 function renderTikTokSpotlight() {
   const container = qs('#home-tiktok-feed');
   if (!container) return;
 
-  const card = createEl('a', {
-    className: 'tiktok-fallback',
-    href: TIKTOK_PROFILE.profileUrl,
-    target: '_blank',
-    rel: 'noopener noreferrer',
-    'aria-label': `Open TikTok profile @${TIKTOK_PROFILE.handle}`,
-  },
-    createEl('span', { className: 'tiktok-kicker' }, 'TikTok'),
-    createEl('strong', {}, `@${TIKTOK_PROFILE.handle}`),
-    createEl('p', {}, 'Short posts from campus, construction, data, and building in public.'),
-    createEl('span', { className: 'tiktok-open' }, 'Open latest posts')
-  );
+  const parent = container.parentElement;
+  
+  // Clean up any existing tabs first to avoid duplicates
+  const existingTabs = parent.querySelector('.tiktok-tabs');
+  if (existingTabs) existingTabs.remove();
 
-  container.replaceChildren(card);
-  container.classList.add('tiktok-ready-fallback');
+  const tabsWrap = createEl('div', { className: 'tiktok-tabs' });
+  
+  TIKTOK_POSTS.forEach((post, index) => {
+    const tab = createEl('button', {
+      className: `tiktok-tab${index === 0 ? ' active' : ''}`,
+      'data-index': index
+    }, post.title);
+    
+    tab.addEventListener('click', () => {
+      parent.querySelectorAll('.tiktok-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadPost(post.id);
+    });
+    
+    tabsWrap.appendChild(tab);
+  });
+  
+  parent.insertBefore(tabsWrap, container);
+
+  function loadPost(id) {
+    container.innerHTML = '';
+    
+    const loading = createEl('div', { className: 'tiktok-loading' }, 'Loading TikTok post...');
+    container.appendChild(loading);
+    
+    const iframe = createEl('iframe', {
+      src: `https://www.tiktok.com/embed/v2/${id}`,
+      style: 'width: 100%; height: 580px; border: none; border-radius: var(--radius);',
+      allow: 'autoplay; encrypted-media; picture-in-picture',
+      allowfullscreen: 'true'
+    });
+    
+    iframe.addEventListener('load', () => {
+      loading.remove();
+    });
+    
+    container.appendChild(iframe);
+  }
+
+  // Load the first post initially
+  loadPost(TIKTOK_POSTS[0].id);
 }
 
 function renderProjects() {
