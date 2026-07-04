@@ -347,39 +347,21 @@ function renderTikTokSpotlight() {
   const container = qs('#home-tiktok-feed');
   if (!container) return;
 
-  const parent = container.parentElement;
+  container.innerHTML = '';
   
-  // Clean up any existing tabs first to avoid duplicates
+  // Clean up any remaining tabs
+  const parent = container.parentElement;
   const existingTabs = parent.querySelector('.tiktok-tabs');
   if (existingTabs) existingTabs.remove();
 
-  const tabsWrap = createEl('div', { className: 'tiktok-tabs' });
-  
-  TIKTOK_POSTS.forEach((post, index) => {
-    const tab = createEl('button', {
-      className: `tiktok-tab${index === 0 ? ' active' : ''}`,
-      'data-index': index
-    }, post.title);
+  TIKTOK_POSTS.forEach(post => {
+    const card = createEl('div', { className: 'tiktok-card' });
     
-    tab.addEventListener('click', () => {
-      parent.querySelectorAll('.tiktok-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      loadPost(post.id);
-    });
-    
-    tabsWrap.appendChild(tab);
-  });
-  
-  parent.insertBefore(tabsWrap, container);
-
-  function loadPost(id) {
-    container.innerHTML = '';
-    
-    const loading = createEl('div', { className: 'tiktok-loading' }, 'Loading TikTok post...');
-    container.appendChild(loading);
+    const loading = createEl('div', { className: 'tiktok-loading' }, 'Loading TikTok...');
+    card.appendChild(loading);
     
     const iframe = createEl('iframe', {
-      src: `https://www.tiktok.com/embed/v2/${id}`,
+      src: `https://www.tiktok.com/embed/v2/${post.id}`,
       style: 'width: 100%; height: 580px; border: none; border-radius: var(--radius);',
       allow: 'autoplay; encrypted-media; picture-in-picture',
       allowfullscreen: 'true'
@@ -389,11 +371,9 @@ function renderTikTokSpotlight() {
       loading.remove();
     });
     
-    container.appendChild(iframe);
-  }
-
-  // Load the first post initially
-  loadPost(TIKTOK_POSTS[0].id);
+    card.appendChild(iframe);
+    container.appendChild(card);
+  });
 }
 
 function renderProjects() {
