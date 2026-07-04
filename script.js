@@ -9,7 +9,7 @@ const PROJECTS = [
     title: 'StudyPulse Timer (Vibecoded)',
     summary: 'A premium, AI-integrated study timer built with Antigravity. Designed to provide a valuable, intelligent study session.',
     tools: ['Antigravity', 'AI Integration', 'Vibecoding', 'UI/UX'],
-    problem: 'Students usually measure their productivity by "hours spent studying" instead of actual effectiveness. They use a bunch of disconnected tools—a timer app for focus, a spreadsheet for grades, and a notebook for planning. As a result, they study blindly, unable to see if their 5 hours of "re-reading notes" actually translated into a better test score than 2 hours of "active recall." This leads to burnout, wasted time, and lower-than-expected marks.',
+    problem: 'Students usually measure their productivity by "hours spent studying" instead of actual effectiveness. They use a bunch of disconnected tools: a timer app for focus, a spreadsheet for grades, and a notebook for planning. As a result, they study blindly, unable to see if their 5 hours of "re-reading notes" actually translated into a better test score than 2 hours of "active recall." This leads to burnout, wasted time, and lower-than-expected marks.',
     approach: 'StudyPulse bridges the gap between effort and results. We built a single, unified platform that combines three core pillars: Focus & Execution (smart Pomodoro timer), Grade Tracking (robust marks dashboard), and AI-Driven Insights (analyzes habits and tells them exactly what is working and what isn\'t).',
     outcome: 'The Aim: To transform studying from a blind grind into a data-driven, highly optimized process so students can study less, score higher, and maintain a healthy balance. As someone who wants to be a data scientist in future, the better way to use data is now.',
     github: 'https://github.com/mazwiibaxolele/StudyPulse.git',
@@ -23,7 +23,7 @@ const PROJECTS = [
     tools: ['Python', 'pandas', 'matplotlib', 'seaborn', 'MySQL', 'Power BI'],
     problem: 'A telecommunications company was experiencing elevated customer churn without a clear understanding of which customer segments were most at risk or why they were leaving. Decisions around retention were being made without data support.',
     approach: 'Pulled and cleaned a dataset of 7,032 customers using pandas. Conducted exploratory data analysis to segment customers by contract type, tenure, and service usage. Built visualisations in matplotlib and seaborn, and modelled churn predictors. Imported into MySQL for structured querying and built a Power BI dashboard for business reporting.',
-    outcome: 'Identified a 26.58% overall churn rate. Discovered that 42.71% of month-to-month contract customers churned, and that 47.68% of new customers left within their first year — pointing to an onboarding and early-retention problem.',
+    outcome: 'Identified a 26.58% overall churn rate. Discovered that 42.71% of month-to-month contract customers churned, and that 47.68% of new customers left within their first year, pointing to an onboarding and early-retention problem.',
     github: 'https://github.com/mazwiibaxolele/FUTURE_DS_02',
     image: 'images/project1-a.png',
   },
@@ -55,56 +55,56 @@ const EXPERIENCES = [
   {
     role: 'Mentor',
     org: 'WITS School of Construction Economics and Management',
-    period: 'Apr 2026 – Present',
+    period: 'Apr 2026 - Present',
     desc: 'Mentoring students within the Construction Economics and Management faculty at Wits, supporting their academic development and professional preparation.',
     skills: ['Mentoring', 'Academic Support', 'Construction Economics']
   },
   {
     role: 'Quantities and Specification || Tutor',
     org: 'ASAQS',
-    period: 'Feb 2026 – Jun 2026',
+    period: 'Feb 2026 - Jun 2026',
     desc: 'Tutoring students in quantities and specification as part of the ASAQS programme, helping candidates develop technical proficiency in core surveying competencies.',
     skills: ['Quantity Surveying', 'Specification', 'Teaching']
   },
   {
     role: 'Subcom (Treasurer) | Wits',
     org: 'The Chartered Institute of Building (CIOB)',
-    period: 'Feb 2025 – Nov 2025',
+    period: 'Feb 2025 - Nov 2025',
     desc: 'Served as Treasurer of the CIOB Africa Novus Subcommittee at Wits, responsible for managing finances, tracking expenditure, and supporting financial planning of student chapter activities. Developed financial accountability and organisational discipline.',
     skills: ['Budget Tracking', 'Financial Reporting', 'Leadership']
   },
   {
     role: 'Member',
     org: 'The Chartered Institute of Building (CIOB)',
-    period: 'Feb 2025 – Oct 2025',
+    period: 'Feb 2025 - Oct 2025',
     desc: 'As part of being the CIOB Africa Novus Subcommittee Treasurer at Wits, I got the opportunity to be a CIOB member.',
     skills: ['Professional Institution', 'Networking']
   },
   {
     role: 'Soup Kitchen (Volunteer-WCCO)',
     org: 'University of the Witwatersrand',
-    period: 'Feb 2025 – Oct 2025',
+    period: 'Feb 2025 - Oct 2025',
     desc: 'Volunteered with the Wits Community Citizenship Organisation, contributing to food preparation and distribution at a campus soup kitchen. Developed teamwork, reliability, and a practical commitment to community service.',
     skills: ['Community Service', 'Teamwork', 'Reliability']
   },
   {
     role: 'Marketing Team (EBESC-subcomm)',
     org: 'University of the Witwatersrand',
-    period: 'Feb 2025 – Oct 2025',
+    period: 'Feb 2025 - Oct 2025',
     desc: 'Contributed to the marketing and communications work of the Engineering and Built Environment Student Council subcommittee. Supported content creation, event promotion, and outreach activities.',
     skills: ['Marketing', 'Communications', 'Content Creation']
   },
   {
     role: 'Mentor (CEM)',
     org: 'WITS School of Construction Economics and Management',
-    period: 'Feb 2025 – Oct 2025',
+    period: 'Feb 2025 - Oct 2025',
     desc: 'Mentoring students within the faculty, supporting their academic development.',
     skills: ['Mentoring', 'Academic Support']
   },
   {
     role: 'Student Intern',
     org: 'AZRA DEVELOPMENTS',
-    period: 'Jun 2025 – Jul 2025',
+    period: 'Jun 2025 - Jul 2025',
     desc: 'Supported on-site delivery of roadworks and retaining walls. Conducted manual and GNSS-based surveying, assisted with trench preparation and traffic accommodation. Documented construction process on LinkedIn.',
     skills: ['Surveying', 'Trench Prep', 'Traffic Accommodation']
   },
@@ -131,12 +131,6 @@ const CERTIFICATIONS = [
     link: 'https://www.datacamp.com/certificate/DEA0011274287496'
   },
   {
-    title: 'ALX Africa Academy Data Engineering',
-    issuer: 'ALX Africa',
-    credentialId: '3z2JCsx5Fy',
-    link: 'https://savanna.alxafrica.com/certificates/3z2JCsx5Fy'
-  },
-  {
     title: 'IBM Data Analyst Professional',
     issuer: 'IBM',
     credentialId: '8QBWSDZZOGDQ',
@@ -158,8 +152,10 @@ const CERTIFICATIONS = [
 
 const TIKTOK_PROFILE = {
   handle: 'bax.lle',
-  profileUrl: 'https://www.tiktok.com/@bax.lle',
+  profileUrl: 'https://www.tiktok.com/@bax.lle?is_from_webapp=1&sender_device=pc',
 };
+
+const TIKTOK_EMBED_TIMEOUT_MS = 3500;
 
 /* ─────────────────────────────────────────────────────
    UTILITY
@@ -329,49 +325,25 @@ function renderTimeline() {
 /* ─────────────────────────────────────────────────────
    RENDER: PROJECTS
 ───────────────────────────────────────────────────── */
-function loadTikTokEmbed() {
-  const existing = document.querySelector('script[data-tiktok-embed]');
-  if (existing) return;
-
-  const script = document.createElement('script');
-  script.src = 'https://www.tiktok.com/embed.js';
-  script.async = true;
-  script.dataset.tiktokEmbed = 'true';
-  document.body.appendChild(script);
-}
-
 function renderTikTokSpotlight() {
   const container = qs('#home-tiktok-feed');
   if (!container) return;
 
-  const profileLink = createEl('a', {
+  const card = createEl('a', {
+    className: 'tiktok-fallback',
     href: TIKTOK_PROFILE.profileUrl,
     target: '_blank',
     rel: 'noopener noreferrer',
-  }, `@${TIKTOK_PROFILE.handle}`);
-
-  const fallback = createEl('section', { className: 'tiktok-fallback' },
-    createEl('p', {}, 'Loading latest TikTok posts from '),
-    profileLink,
-    createEl('span', {}, '.')
+    'aria-label': `Open TikTok profile @${TIKTOK_PROFILE.handle}`,
+  },
+    createEl('span', { className: 'tiktok-kicker' }, 'TikTok'),
+    createEl('strong', {}, `@${TIKTOK_PROFILE.handle}`),
+    createEl('p', {}, 'Short posts from campus, construction, data, and building in public.'),
+    createEl('span', { className: 'tiktok-open' }, 'Open latest posts')
   );
 
-  const embed = createEl('blockquote', {
-    className: 'tiktok-embed',
-    cite: TIKTOK_PROFILE.profileUrl,
-    'data-unique-id': TIKTOK_PROFILE.handle,
-    'data-embed-type': 'creator',
-  }, fallback);
-
-  container.replaceChildren(embed);
-
-  const observer = new IntersectionObserver((entries, instance) => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    loadTikTokEmbed();
-    instance.disconnect();
-  }, { rootMargin: '240px 0px' });
-
-  observer.observe(container);
+  container.replaceChildren(card);
+  container.classList.add('tiktok-ready-fallback');
 }
 
 function renderProjects() {

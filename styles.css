@@ -264,7 +264,7 @@ h1, h2, h3, h4 {
 }
 
 .tiktok-card {
-  min-height: 430px;
+  min-height: 220px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   background: var(--bg-secondary);
@@ -280,21 +280,50 @@ h1, h2, h3, h4 {
 }
 
 .tiktok-fallback {
-  min-height: 430px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
+  min-height: 220px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
   padding: 24px;
   color: var(--text-secondary);
-  text-align: center;
+  background: var(--bg-secondary);
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.tiktok-fallback a {
+.tiktok-fallback:hover {
+  background: var(--bg-tertiary);
+}
+
+.tiktok-fallback strong {
+  color: var(--text-primary);
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.tiktok-fallback p {
+  max-width: 480px;
+  color: var(--text-secondary);
+}
+
+.tiktok-kicker {
+  width: fit-content;
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tiktok-open {
   color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.tiktok-ready-fallback {
+  min-height: 220px;
 }
 
 /* ==========================================================================
@@ -873,8 +902,9 @@ h1, h2, h3, h4 {
     transform: scale(0.8);
   }
   .tiktok-card,
-  .tiktok-fallback {
-    min-height: 360px;
+  .tiktok-fallback,
+  .tiktok-ready-fallback {
+    min-height: 200px;
   }
 }
 
