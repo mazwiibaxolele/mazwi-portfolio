@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.tiktok.com https://*.tiktok.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="Baxolele Mazwi, BSc Construction student at Wits and aspiring data scientist. Portfolio of projects, experience, and skills." />
-  <meta name="theme-color" content="#08080c" />
+  <meta name="theme-color" content="#000000" />
   <link rel="canonical" href="https://mazwiibaxolele.github.io/mazwi-portfolio/" />
   <!-- Open Graph -->
   <meta property="og:title" content="Baxolele Mazwi | Portfolio" />
@@ -45,7 +45,7 @@
   </script>
   <noscript>
     <style>
-      .reveal, .h-reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
+      .reveal, .reveal-after-type { opacity: 1 !important; transform: none !important; }
       .section { display: block !important; }
     </style>
   </noscript>
@@ -53,13 +53,6 @@
 <body>
   <!-- Skip to content for accessibility -->
   <a href="#main" class="skip-link">Skip to content</a>
-
-  <!-- Ambient liquid-glass background -->
-  <div class="ambient" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
 
   <!-- NAVIGATION -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
@@ -97,37 +90,15 @@
     <!-- ========== HOME ========== -->
     <section id="home" class="section">
       <div class="home-hero">
-        <div class="hero-badge h-reveal" style="--d:.05s">
-          <span class="badge-dot"></span>
-          Open to internships — Data Analytics · BI · Construction
-        </div>
-        <h1 class="hero-title h-reveal" style="--d:.15s">Baxolele <span class="grad">Mazwi</span></h1>
-        <p class="hero-role h-reveal" style="--d:.28s">BSc Construction @ Wits<span class="sep">·</span>Aspiring Data Scientist</p>
-        <p class="hero-subtitle h-reveal" style="--d:.4s">I connect the built environment with data — turning site experience, numbers, and real decisions into clear insight.</p>
-        <div class="hero-cta h-reveal" style="--d:.52s">
-          <a href="#projects" class="btn-glass btn-accent">View Projects
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="documents/Mazwi_Baxolele_UCV.docx" download class="btn-glass">Download CV
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </a>
-        </div>
-        <div class="hero-stats h-reveal" style="--d:.64s">
-          <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">Data Projects</span></div>
-          <div class="stat"><span class="stat-num" data-count="5">0</span><span class="stat-label">Certifications</span></div>
-          <div class="stat"><span class="stat-num" data-count="9">0</span><span class="stat-label">Roles &amp; Internships</span></div>
-          <div class="stat"><span class="stat-num">'27</span><span class="stat-label">Wits Graduation</span></div>
-        </div>
+        <h1 class="hero-title" id="hero-title">
+          <span><span id="typewriter-target"></span><span class="cursor">|</span></span>
+          <a href="documents/Mazwi_Baxolele_UCV.docx" download class="btn-micro reveal-after-type" title="Download CV">CV</a>
+        </h1>
+        <p class="hero-subtitle reveal-after-type">BSc Construction student at Wits and aspiring data scientist, learning how the built environment, numbers, and real decisions connect.</p>
+        <p class="hero-open-roles reveal-after-type">Open to internships and flexible roles in data analytics, BI, and construction.</p>
       </div>
-
-      <div class="skills-marquee h-reveal" style="--d:.78s" aria-label="Core skills">
-        <div class="marquee-track">
-          <span>Python</span><span>SQL</span><span>Power BI</span><span>pandas</span><span>Excel</span><span>DAX</span><span>Power Query</span><span>MySQL</span><span>matplotlib</span><span>seaborn</span><span>Data Analysis</span><span>Quantity Surveying</span>
-          <span aria-hidden="true">Python</span><span aria-hidden="true">SQL</span><span aria-hidden="true">Power BI</span><span aria-hidden="true">pandas</span><span aria-hidden="true">Excel</span><span aria-hidden="true">DAX</span><span aria-hidden="true">Power Query</span><span aria-hidden="true">MySQL</span><span aria-hidden="true">matplotlib</span><span aria-hidden="true">seaborn</span><span aria-hidden="true">Data Analysis</span><span aria-hidden="true">Quantity Surveying</span>
-        </div>
-      </div>
-
-      <div class="home-tiktok reveal">
+      
+      <div class="home-tiktok reveal-after-type">
         <div class="latest-header">
           <h3>TikTok Spotlight</h3>
         </div>
