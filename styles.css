@@ -293,7 +293,7 @@ button:focus-visible,
 
 .fg-scene {
   position: relative;
-  height: 440px;
+  height: 375px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -983,7 +983,7 @@ button:focus-visible,
     transform: scale(0.8);
   }
   .fg-scene {
-    height: 360px;
+    height: 325px;
   }
   .fg-photo {
     width: 120px;
