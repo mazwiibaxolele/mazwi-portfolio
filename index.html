@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.tiktok.com https://*.tiktok.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="Baxolele Mazwi, BSc Construction student at Wits and aspiring data scientist. Portfolio of projects, experience, and skills." />
   <meta name="theme-color" content="#000000" />
@@ -98,12 +98,24 @@
         <p class="hero-open-roles reveal-after-type">Open to internships and flexible roles in data analytics, BI, and construction.</p>
       </div>
       
-      <div class="home-tiktok reveal-after-type">
+      <div class="home-gallery reveal-after-type">
         <div class="latest-header">
-          <h3>TikTok Spotlight</h3>
+          <h3>Moments</h3>
         </div>
-        <div class="tiktok-grid" id="home-tiktok-feed">
-          <!-- Injected by JS -->
+        <div class="folder-gallery" id="folder-gallery">
+          <div class="fg-scene">
+            <div class="fg-back" aria-hidden="true"></div>
+            <div class="fg-stack" id="fg-stack">
+              <div class="fg-photo"><img src="images/exp-intern-civil.jpg" alt="On site during a civil engineering internship" loading="lazy" draggable="false"></div>
+              <div class="fg-photo"><img src="images/exp-mentor.jpg" alt="Mentoring students at Wits" loading="lazy" draggable="false"></div>
+              <div class="fg-photo"><img src="images/exp-intern-priotech.jpg" alt="Interning at Priotech Projects" loading="lazy" draggable="false"></div>
+              <div class="fg-photo"><img src="images/exp-tutor.jpg" alt="Tutoring quantities and specification" loading="lazy" draggable="false"></div>
+            </div>
+            <button class="fg-cover" id="fg-cover" aria-expanded="false" aria-controls="fg-stack" aria-label="Open the photo folder">
+              <span class="fg-label">baxolele.gallery</span>
+            </button>
+          </div>
+          <p class="fg-hint" id="fg-hint">Drag a photo down or press Esc to close</p>
         </div>
       </div>
     </section>

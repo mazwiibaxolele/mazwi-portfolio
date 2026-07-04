@@ -23,50 +23,53 @@
    VARIABLES & THEME
    ========================================================================== */
 :root {
-  /* Dark Theme (Default) */
-  --bg-color: #000000;
+  /* Dark Theme (Default) — neutral oklch token scale */
+  --bg-color: oklch(0 0 0);            /* background */
   --bg-rgb: 0, 0, 0;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
-  
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
-  
-  --border-color: #222222;
-  --border-hover: #333333;
-  
-  --accent: #ffffff; /* pure white accents */
+  --bg-secondary: oklch(0.14 0 0);     /* card */
+  --bg-tertiary: oklch(0.23 0 0);      /* muted */
+
+  --text-primary: oklch(1 0 0);        /* foreground */
+  --text-secondary: oklch(0.72 0 0);   /* muted-foreground */
+  --text-muted: oklch(0.56 0 0);
+
+  --border-color: oklch(0.26 0 0);     /* border */
+  --border-hover: oklch(0.32 0 0);     /* input / accent */
+
+  --accent: oklch(1 0 0); /* pure white accents */
   --fan-shadow: rgba(0, 0, 0, 0.5);
-  
+
   --nav-height: 80px;
   --max-width: 720px;
   --radius: 12px;
-  
+
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-  
-  /* Timeline Dots */
-  --dot-1: #3b82f6; /* Blue */
-  --dot-2: #eab308; /* Yellow */
+
+  /* Timeline Dots (chart tokens) */
+  --dot-1: oklch(0.58 0.21 260.84);    /* chart-2 blue */
+  --dot-2: oklch(0.81 0.17 75.35);     /* chart-1 amber */
   --dot-3: #22c55e; /* Green */
-  --dot-4: #ef4444; /* Red */
+  --dot-4: oklch(0.69 0.20 23.91);     /* destructive red */
 }
 
 [data-theme="light"] {
-  --bg-color: #ffffff;
+  --bg-color: oklch(0.99 0 0);         /* background */
   --bg-rgb: 255, 255, 255;
-  --bg-secondary: #f4f4f5;
-  --bg-tertiary: #e4e4e7;
-  
-  --text-primary: #000000;
-  --text-secondary: #52525b;
-  --text-muted: #a1a1aa;
-  
-  --border-color: #e4e4e7;
-  --border-hover: #d4d4d8;
-  
-  --accent: #000000;
+  --bg-secondary: oklch(0.97 0 0);     /* muted */
+  --bg-tertiary: oklch(0.94 0 0);      /* accent */
+
+  --text-primary: oklch(0 0 0);        /* foreground */
+  --text-secondary: oklch(0.44 0 0);   /* muted-foreground */
+  --text-muted: oklch(0.72 0 0);
+
+  --border-color: oklch(0.92 0 0);     /* border */
+  --border-hover: oklch(0.87 0 0);
+
+  --accent: oklch(0 0 0);
   --fan-shadow: rgba(0, 0, 0, 0.15);
+
+  --dot-1: oklch(0.55 0.22 264.53);    /* chart-2 blue */
+  --dot-4: oklch(0.63 0.19 23.03);     /* destructive red */
 }
 
 /* ==========================================================================
@@ -279,62 +282,141 @@ button:focus-visible,
   font-size: 1.1rem;
 }
 
-.home-tiktok {
+.home-gallery {
   margin-top: 32px;
 }
 
-.tiktok-grid {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  gap: 20px;
-  margin-top: 24px;
-  padding: 10px 4px 20px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-hover) transparent;
-}
-
-.tiktok-grid::-webkit-scrollbar {
-  height: 6px;
-}
-
-.tiktok-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.tiktok-grid::-webkit-scrollbar-thumb {
-  background-color: var(--border-color);
-  border-radius: 99px;
-}
-
-.tiktok-grid::-webkit-scrollbar-thumb:hover {
-  background-color: var(--border-hover);
-}
-
-.tiktok-card {
-  flex: 0 0 320px;
-  scroll-snap-align: start;
-  min-height: 580px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  background: var(--bg-secondary);
-  overflow: hidden;
+/* Interactive folder gallery */
+.folder-gallery {
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
-.tiktok-loading {
+.fg-scene {
+  position: relative;
+  height: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.fg-back {
   position: absolute;
-  top: 50%;
+  bottom: 16px;
+  width: 300px;
+  height: 190px;
+  border-radius: var(--radius);
+  background: linear-gradient(to bottom, var(--bg-tertiary), var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  transition: opacity 0.3s ease;
+}
+
+.fg-back::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: -1px;
+  width: 110px;
+  height: 15px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.fg-photo {
+  position: absolute;
+  bottom: 44px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  width: 150px;
+  height: 190px;
+  margin-left: -75px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 40px var(--fan-shadow);
+  transform-origin: bottom center;
+  transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.4, 1), box-shadow 0.3s ease;
   pointer-events: none;
+  touch-action: none;
+  will-change: transform;
+  background: var(--bg-secondary);
+}
+
+.folder-gallery.open .fg-photo {
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.fg-photo.dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.fg-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fg-cover {
+  position: absolute;
+  bottom: 0;
+  width: 320px;
+  height: 170px;
+  border-radius: 16px;
+  background: linear-gradient(to bottom, var(--bg-tertiary), var(--bg-secondary));
+  border: 1px solid var(--border-hover);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+  cursor: pointer;
+  z-index: 60;
+  transform-origin: bottom center;
+  transition: transform 0.35s ease, opacity 0.3s ease;
+  box-shadow: 0 -12px 30px var(--fan-shadow);
+}
+
+.folder-gallery.hover:not(.open) .fg-cover {
+  transform: perspective(900px) rotateX(-25deg) translateY(10px);
+}
+
+.folder-gallery.open .fg-cover,
+.folder-gallery.open .fg-back {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fg-label {
+  padding: 8px 18px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.fg-hint {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: -16px;
+}
+
+.folder-gallery.open .fg-hint {
+  opacity: 1;
+  transform: none;
 }
 
 /* ==========================================================================
@@ -900,9 +982,23 @@ button:focus-visible,
   .photo-fan {
     transform: scale(0.8);
   }
-  .tiktok-card {
-    flex: 0 0 280px;
-    min-height: 500px;
+  .fg-scene {
+    height: 360px;
+  }
+  .fg-photo {
+    width: 120px;
+    height: 152px;
+    margin-left: -60px;
+    bottom: 38px;
+  }
+  .fg-cover {
+    width: 260px;
+    height: 140px;
+    padding-bottom: 18px;
+  }
+  .fg-back {
+    width: 240px;
+    height: 158px;
   }
 }
 

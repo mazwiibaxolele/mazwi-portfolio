@@ -188,15 +188,6 @@ function initTheme() {
     const next    = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('portfolio-theme', next);
-    
-    // Update TikTok iframe themes to match site theme
-    qsa('#home-tiktok-feed iframe').forEach(iframe => {
-      try {
-        const src = new URL(iframe.src);
-        src.searchParams.set('theme', next);
-        iframe.src = src.toString();
-      } catch(e) {}
-    });
   });
 }
 
@@ -338,63 +329,98 @@ function renderTimeline() {
 }
 
 /* ─────────────────────────────────────────────────────
-   RENDER: PROJECTS
+   INTERACTIVE FOLDER GALLERY (Home)
 ───────────────────────────────────────────────────── */
-const TIKTOK_POSTS = [
-  {
-    id: '7592475809793740053',
-    url: 'https://www.tiktok.com/@bax.lle/photo/7592475809793740053',
-    title: 'Latest Post'
-  },
-  {
-    id: '7620013492417891591',
-    url: 'https://www.tiktok.com/@bax.lle/video/7620013492417891591',
-    title: 'Featured Video'
-  },
-  {
-    id: '7623805220874620168',
-    url: 'https://www.tiktok.com/@bax.lle/video/7623805220874620168',
-    title: 'Recent Upload'
+function initFolderGallery() {
+  const gallery = qs('#folder-gallery');
+  if (!gallery) return;
+
+  const scene  = qs('.fg-scene', gallery);
+  const cover  = qs('#fg-cover');
+  const photos = qsa('.fg-photo', gallery);
+  const mid = (photos.length - 1) / 2;
+  let isOpen = false;
+
+  function layout() {
+    const hovered = gallery.classList.contains('hover');
+    const photoW = photos[0].offsetWidth || 150;
+    const spread = Math.max(40, Math.min(130, (scene.clientWidth - photoW) / (photos.length - 1) * 0.55));
+
+    photos.forEach((photo, i) => {
+      const o = i - mid;
+      let x, y, rot, sc;
+      if (isOpen) {
+        x = o * spread; y = -120; rot = 0; sc = 1.05;
+      } else if (hovered) {
+        x = o * 30; y = o * -10 - 40; rot = o * 8; sc = 1 - Math.abs(o) * 0.03;
+      } else {
+        x = o * 3; y = o * -5; rot = o * 3; sc = 1 - Math.abs(o) * 0.03;
+      }
+      photo.dataset.x = x;
+      photo.dataset.y = y;
+      photo.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(${sc})`;
+      photo.style.zIndex = isOpen ? 50 : 10 + i;
+    });
   }
-];
 
-function renderTikTokSpotlight() {
-  const container = qs('#home-tiktok-feed');
-  if (!container) return;
+  function setOpen(open) {
+    isOpen = open;
+    gallery.classList.toggle('open', open);
+    if (!open) gallery.classList.remove('hover');
+    cover.setAttribute('aria-expanded', String(open));
+    layout();
+    if (!open) cover.focus();
+  }
 
-  container.innerHTML = '';
-  
-  // Clean up any remaining tabs
-  const parent = container.parentElement;
-  const existingTabs = parent.querySelector('.tiktok-tabs');
-  if (existingTabs) existingTabs.remove();
+  cover.addEventListener('click', () => setOpen(true));
+  cover.addEventListener('mouseenter', () => { if (!isOpen) { gallery.classList.add('hover'); layout(); } });
+  cover.addEventListener('mouseleave', () => { gallery.classList.remove('hover'); layout(); });
 
-  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-
-  TIKTOK_POSTS.forEach(post => {
-    const card = createEl('div', { className: 'tiktok-card' });
-
-    const loading = createEl('div', { className: 'tiktok-loading' }, 'Loading TikTok...');
-    card.appendChild(loading);
-
-    const iframe = createEl('iframe', {
-      src: `https://www.tiktok.com/embed/v2/${post.id}?lang=en-US&theme=${currentTheme}`,
-      style: 'width: 100%; height: 100%; min-height: 580px; border: none; border-radius: var(--radius);',
-      allow: 'autoplay; encrypted-media; picture-in-picture',
-      allowfullscreen: 'true',
-      loading: 'lazy',
-      title: `TikTok post by @bax.lle: ${post.title}`
-    });
-    
-    iframe.addEventListener('load', () => {
-      loading.remove();
-    });
-    
-    card.appendChild(iframe);
-    container.appendChild(card);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen) setOpen(false);
   });
+
+  window.addEventListener('resize', layout);
+
+  // Drag any photo down past 100px to close; otherwise it snaps back
+  photos.forEach(photo => {
+    photo.addEventListener('pointerdown', e => {
+      if (!isOpen) return;
+      e.preventDefault();
+      try { photo.setPointerCapture(e.pointerId); } catch (err) { /* pointer already lost */ }
+      photo.classList.add('dragging');
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const baseX = parseFloat(photo.dataset.x) || 0;
+      const baseY = parseFloat(photo.dataset.y) || 0;
+      let dy = 0;
+
+      const onMove = ev => {
+        const dx = ev.clientX - startX;
+        dy = ev.clientY - startY;
+        photo.style.zIndex = 150;
+        photo.style.transform = `translate(${baseX + dx}px, ${baseY + dy}px) rotate(5deg) scale(1.15)`;
+      };
+      const onUp = () => {
+        photo.removeEventListener('pointermove', onMove);
+        photo.removeEventListener('pointerup', onUp);
+        photo.removeEventListener('pointercancel', onUp);
+        photo.classList.remove('dragging');
+        if (dy > 100) setOpen(false);
+        else layout();
+      };
+      photo.addEventListener('pointermove', onMove);
+      photo.addEventListener('pointerup', onUp);
+      photo.addEventListener('pointercancel', onUp);
+    });
+  });
+
+  layout();
 }
 
+/* ─────────────────────────────────────────────────────
+   RENDER: PROJECTS
+───────────────────────────────────────────────────── */
 function renderProjects() {
   // Projects List on Projects Page
   const list = qs('#projects-list');
@@ -568,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initTheme();
   renderTimeline();
-  renderTikTokSpotlight();
+  initFolderGallery();
   renderProjects();
   renderCerts();
   initBackBtn();
