@@ -496,7 +496,7 @@ function openProject(id) {
     <h3>The Outcome</h3>
     <p class="pd-desc">${proj.outcome}</p>
     
-    <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+    <div class="pd-links">
       ${proj.appLink ? `<a href="${proj.appLink}" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live App</a>` : ''}
       <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-primary">View GitHub</a>
     </div>

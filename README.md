@@ -4,6 +4,7 @@
 ![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
 
 > A deeply minimal, high-performance personal portfolio built to showcase the intersection of **Construction Management** and **Data Engineering & Analytics**.
 
@@ -18,17 +19,20 @@ The core philosophy behind this project was **"bridging the gap."** The construc
 ## Key Technical Features
 * **Dynamic Data Rendering:** All projects, experiences, and certifications are stored as JavaScript objects in `script.js` and rendered dynamically into the DOM, making future updates seamless.
 * **Custom Interaction Logic:** Hand-rolled logic for tabbed navigation, interactive modals, and certification dropdowns.
-* **Scroll Animations:** Integrated `IntersectionObserver` for performant, fluid scroll-reveal animations.
+* **Scroll Animations:** Integrated `IntersectionObserver` for performant, fluid scroll-reveal animations, with full `prefers-reduced-motion` support.
 * **Responsive & Adaptive:** Fully responsive layout with mobile-first media queries and a sleek dark theme.
-* **Zero Dependencies:** Built strictly with Vanilla HTML5, CSS3, and ES6 JavaScript.
+* **Zero Dependencies:** Built strictly with Vanilla HTML5, CSS3, and ES6 JavaScript. Fonts are self-hosted — no third-party requests except the TikTok embeds.
+* **Hardened by Default:** Strict Content Security Policy, referrer policy, and accessible keyboard navigation (skip link, focus management, ARIA states).
 
 ## Project Structure
 ```text
 mazwi-portfolio/
 ├── index.html          # Main HTML structure
+├── 404.html            # Custom not-found page for GitHub Pages
 ├── styles.css          # Design system, theme variables, responsive layout, and mobile nav
 ├── script.js           # Core logic, animations, and data source
 ├── documents/          # Downloadable assets (CV, Cover Letter)
+├── fonts/              # Self-hosted Inter variable font (woff2)
 └── images/             # Optimised project and profile images
 ```
 
@@ -46,3 +50,6 @@ Because this project uses pure Vanilla JS/HTML/CSS, no build step or package man
 ## Connect With Me
 * **LinkedIn:** [Baxolele Mazwi](https://www.linkedin.com/in/baxolele-mazwi-9b2322267)
 * **Email:** [mazwiibaxolele@gmail.com](mailto:mazwiibaxolele@gmail.com)
+
+## License
+Released under the [MIT License](LICENSE). Personal content (images, documents, and text) remains © Baxolele Mazwi.

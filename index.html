@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.tiktok.com https://*.tiktok.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.tiktok.com https://*.tiktok.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="Baxolele Mazwi, BSc Construction student at Wits and aspiring data scientist. Portfolio of projects, experience, and skills." />
   <meta name="theme-color" content="#000000" />
   <link rel="canonical" href="https://mazwiibaxolele.github.io/mazwi-portfolio/" />
@@ -19,12 +19,30 @@
   <meta name="twitter:description" content="BSc Construction student at Wits and aspiring data scientist." />
   <meta name="twitter:image" content="https://mazwiibaxolele.github.io/mazwi-portfolio/images/profile.jpg" />
   <title>Baxolele Mazwi | Construction &amp; Data Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Minimal Inter font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Self-hosted Inter variable font -->
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Baxolele Mazwi",
+    "url": "https://mazwiibaxolele.github.io/mazwi-portfolio/",
+    "image": "https://mazwiibaxolele.github.io/mazwi-portfolio/images/profile.jpg",
+    "jobTitle": "BSc Construction Student & Aspiring Data Scientist",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of the Witwatersrand"
+    },
+    "sameAs": [
+      "https://linkedin.com/in/baxolele-mazwi-9b2322267",
+      "https://github.com/mazwiibaxolele",
+      "https://x.com/baxlle",
+      "https://www.instagram.com/bax.lle/"
+    ]
+  }
+  </script>
   <noscript>
     <style>
       .reveal, .reveal-after-type { opacity: 1 !important; transform: none !important; }
