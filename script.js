@@ -195,6 +195,15 @@ function initTheme() {
     const next    = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('portfolio-theme', next);
+    
+    // Update TikTok iframe themes to match site theme
+    qsa('#home-tiktok-feed iframe').forEach(iframe => {
+      try {
+        const src = new URL(iframe.src);
+        src.searchParams.set('theme', next);
+        iframe.src = src.toString();
+      } catch(e) {}
+    });
   });
 }
 
@@ -354,6 +363,8 @@ function renderTikTokSpotlight() {
   const existingTabs = parent.querySelector('.tiktok-tabs');
   if (existingTabs) existingTabs.remove();
 
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+
   TIKTOK_POSTS.forEach(post => {
     const card = createEl('div', { className: 'tiktok-card' });
     
@@ -361,7 +372,7 @@ function renderTikTokSpotlight() {
     card.appendChild(loading);
     
     const iframe = createEl('iframe', {
-      src: `https://www.tiktok.com/embed/v2/${post.id}`,
+      src: `https://www.tiktok.com/embed/v2/${post.id}?lang=en-US&theme=${currentTheme}`,
       style: 'width: 100%; height: 100%; min-height: 580px; border: none; border-radius: var(--radius);',
       allow: 'autoplay; encrypted-media; picture-in-picture',
       allowfullscreen: 'true'
