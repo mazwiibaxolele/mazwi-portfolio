@@ -362,7 +362,7 @@ function renderTikTokSpotlight() {
     
     const iframe = createEl('iframe', {
       src: `https://www.tiktok.com/embed/v2/${post.id}`,
-      style: 'width: 100%; height: 580px; border: none; border-radius: var(--radius);',
+      style: 'width: 100%; height: 100%; min-height: 580px; border: none; border-radius: var(--radius);',
       allow: 'autoplay; encrypted-media; picture-in-picture',
       allowfullscreen: 'true'
     });
