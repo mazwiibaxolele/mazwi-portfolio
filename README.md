@@ -26,7 +26,7 @@ The core philosophy behind this project was **"bridging the gap."** The construc
 ```text
 mazwi-portfolio/
 ├── index.html          # Main HTML structure
-├── styles.css          # Design system, theme variables, and responsive layout
+├── styles.css          # Design system, theme variables, responsive layout, and mobile nav
 ├── script.js           # Core logic, animations, and data source
 ├── documents/          # Downloadable assets (CV, Cover Letter)
 └── images/             # Optimised project and profile images
@@ -44,5 +44,5 @@ Because this project uses pure Vanilla JS/HTML/CSS, no build step or package man
 4. Navigate to `http://localhost:5500`.
 
 ## Connect With Me
-* **LinkedIn:** [Baxolele Mazwi](https://www.linkedin.com/in/baxolele-mazwi-25867a216)
+* **LinkedIn:** [Baxolele Mazwi](https://www.linkedin.com/in/baxolele-mazwi-9b2322267)
 * **Email:** [mazwiibaxolele@gmail.com](mailto:mazwiibaxolele@gmail.com)

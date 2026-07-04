@@ -150,13 +150,6 @@ const CERTIFICATIONS = [
   }
 ];
 
-const TIKTOK_PROFILE = {
-  handle: 'bax.lle',
-  profileUrl: 'https://www.tiktok.com/@bax.lle?is_from_webapp=1&sender_device=pc',
-};
-
-const TIKTOK_EMBED_TIMEOUT_MS = 3500;
-
 /* ─────────────────────────────────────────────────────
    UTILITY
 ───────────────────────────────────────────────────── */
@@ -232,10 +225,18 @@ function initTypewriter() {
     initReveal();
     return;
   }
-  
+
   const text = "hello, Baxolele here";
   let i = 0;
-  
+
+  // Respect reduced-motion: show everything instantly, no typing animation
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    target.textContent = text;
+    qsa('.reveal-after-type').forEach(el => el.classList.add('is-visible'));
+    initReveal();
+    return;
+  }
+
   function typeWriter() {
     if (i < text.length) {
       target.textContent += text.charAt(i);
@@ -262,18 +263,23 @@ function initTypewriter() {
 ───────────────────────────────────────────────────── */
 function initNavigation() {
   const sections = qsa('section[id]');
-  activateSection('home');
+  const sectionIds = sections.map(s => s.id);
+
+  // Deep-link support: honour a URL hash like #projects on first load
+  const initial = location.hash.slice(1);
+  activateSection(sectionIds.includes(initial) ? initial : 'home');
 
   document.body.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="#"]');
     if (!link) return;
-    
+
     const id = link.getAttribute('href').replace('#', '');
     const targetSection = document.getElementById(id);
-    
+
     if (targetSection && targetSection.tagName.toLowerCase() === 'section') {
       e.preventDefault();
       activateSection(id);
+      history.replaceState(null, '', id === 'home' ? location.pathname : `#${id}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
@@ -367,15 +373,17 @@ function renderTikTokSpotlight() {
 
   TIKTOK_POSTS.forEach(post => {
     const card = createEl('div', { className: 'tiktok-card' });
-    
+
     const loading = createEl('div', { className: 'tiktok-loading' }, 'Loading TikTok...');
     card.appendChild(loading);
-    
+
     const iframe = createEl('iframe', {
       src: `https://www.tiktok.com/embed/v2/${post.id}?lang=en-US&theme=${currentTheme}`,
       style: 'width: 100%; height: 100%; min-height: 580px; border: none; border-radius: var(--radius);',
       allow: 'autoplay; encrypted-media; picture-in-picture',
-      allowfullscreen: 'true'
+      allowfullscreen: 'true',
+      loading: 'lazy',
+      title: `TikTok post by @bax.lle: ${post.title}`
     });
     
     iframe.addEventListener('load', () => {
@@ -431,38 +439,32 @@ function renderCerts() {
   container.innerHTML = '';
   CERTIFICATIONS.forEach((cert, idx) => {
     const card = createEl('div', { className: 'cert-card reveal', style: `transition-delay: ${idx * 0.05}s` });
-    
-    // Header
-    const header = createEl('div', { className: 'cert-header', style: 'cursor: default; padding-bottom: 10px;' },
+
+    const header = createEl('div', { className: 'cert-header' },
       createEl('div', { className: 'cert-info' },
         createEl('div', { className: 'cert-title' }, cert.title),
         createEl('div', { className: 'cert-issuer' }, cert.issuer)
       )
     );
     card.appendChild(header);
-    
-    const credText = cert.credentialId ? `Credential ID ${cert.credentialId}` : '';
-    
-    if (credText) {
-      const credContainer = createEl('div', { style: 'padding: 0 20px 20px 20px; background: var(--bg-secondary);' });
+
+    if (cert.credentialId) {
+      const credText = `Credential ID ${cert.credentialId}`;
+      const credContainer = createEl('div', { className: 'cert-cred' });
       if (cert.link) {
-          const linkEl = createEl('a', { 
-            href: cert.link, 
-            target: '_blank', 
-            rel: 'noopener noreferrer', 
-            style: 'color: var(--text-secondary); text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 5px;', 
-            html: `${credText} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>` 
-          });
-          credContainer.appendChild(linkEl);
+        credContainer.appendChild(createEl('a', {
+          className: 'cert-cred-link',
+          href: cert.link,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          html: `${credText} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
+        }));
       } else {
-          const textEl = createEl('span', { style: 'color: var(--text-secondary); font-size: 0.95rem;' }, credText);
-          credContainer.appendChild(textEl);
+        credContainer.appendChild(createEl('span', {}, credText));
       }
       card.appendChild(credContainer);
-    } else {
-      header.style.paddingBottom = '20px';
     }
-    
+
     container.appendChild(card);
   });
 }
@@ -470,10 +472,13 @@ function renderCerts() {
 /* ─────────────────────────────────────────────────────
    MODAL LOGIC
 ───────────────────────────────────────────────────── */
+let lastFocusedEl = null;
+
 function openProject(id) {
   const proj = PROJECTS.find(p => p.id === id);
   if (!proj) return;
 
+  lastFocusedEl = document.activeElement;
   const content = qs('#detail-content');
   content.innerHTML = `
     <img src="${proj.image}" alt="${proj.title}" class="pd-img">
@@ -500,11 +505,16 @@ function openProject(id) {
   qs('#project-detail').classList.remove('hidden');
   document.body.style.overflow = 'hidden'; // prevent bg scroll
   window.scrollTo({ top: 0 }); // Just to be safe
+  qs('#back-btn').focus();
 }
 
 function closeProjectDetail() {
   qs('#project-detail').classList.add('hidden');
   document.body.style.overflow = '';
+  if (lastFocusedEl) {
+    lastFocusedEl.focus();
+    lastFocusedEl = null;
+  }
 }
 
 function initBackBtn() {
@@ -534,8 +544,9 @@ function initHamburger() {
   if (!btn || !drawer) return;
 
   btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    drawer.classList.toggle('open');
+    const open = btn.classList.toggle('open');
+    drawer.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
   });
 
   // Close drawer when a link is clicked
@@ -543,6 +554,7 @@ function initHamburger() {
     link.addEventListener('click', () => {
       btn.classList.remove('open');
       drawer.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
     });
   });
 }
@@ -551,6 +563,9 @@ function initHamburger() {
    INIT
 ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = qs('#footer-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
   initTheme();
   renderTimeline();
   renderTikTokSpotlight();

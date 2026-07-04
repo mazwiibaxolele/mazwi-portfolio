@@ -6,27 +6,35 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.tiktok.com https://*.tiktok.com;" />
   <meta name="description" content="Baxolele Mazwi, BSc Construction student at Wits and aspiring data scientist. Portfolio of projects, experience, and skills." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://mazwiibaxolele.github.io/mazwi-portfolio/" />
   <!-- Open Graph -->
-  <meta property="og:title" content="Baxolele Mazwi Portfolio" />
+  <meta property="og:title" content="Baxolele Mazwi | Portfolio" />
   <meta property="og:description" content="BSc Construction student at Wits and aspiring data scientist. Projects, experience, and certifications." />
-  <meta property="og:image" content="images/profile.png" />
+  <meta property="og:image" content="https://mazwiibaxolele.github.io/mazwi-portfolio/images/profile.jpg" />
+  <meta property="og:url" content="https://mazwiibaxolele.github.io/mazwi-portfolio/" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Baxolele Mazwi Portfolio" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Baxolele Mazwi | Portfolio" />
   <meta name="twitter:description" content="BSc Construction student at Wits and aspiring data scientist." />
-  <meta name="twitter:image" content="images/profile.png" />
-  <title>Baxolele Mazwi</title>
+  <meta name="twitter:image" content="https://mazwiibaxolele.github.io/mazwi-portfolio/images/profile.jpg" />
+  <title>Baxolele Mazwi | Construction &amp; Data Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Minimal Inter font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="mobile-nav.css" />
+  <noscript>
+    <style>
+      .reveal, .reveal-after-type { opacity: 1 !important; transform: none !important; }
+      .section { display: block !important; }
+    </style>
+  </noscript>
 </head>
 <body>
   <!-- Skip to content for accessibility -->
-  <a href="#home" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;">Skip to content</a>
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- NAVIGATION -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
@@ -45,7 +53,7 @@
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
-      <button id="nav-hamburger" class="nav-hamburger" aria-label="Toggle menu">
+      <button id="nav-hamburger" class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -59,12 +67,12 @@
     <a href="#contact" class="nav-link">Contact</a>
   </div>
 
-  <main class="main-content minimal-container">
-    
+  <main id="main" class="main-content minimal-container" tabindex="-1">
+
     <!-- ========== HOME ========== -->
     <section id="home" class="section">
       <div class="home-hero">
-        <h1 class="hero-title" id="hero-title" style="display:flex; align-items:center; flex-wrap:wrap; gap:12px;">
+        <h1 class="hero-title" id="hero-title">
           <span><span id="typewriter-target"></span><span class="cursor">|</span></span>
           <a href="documents/Mazwi_Baxolele_UCV.docx" download class="btn-micro reveal-after-type" title="Download CV">CV</a>
         </h1>
@@ -90,10 +98,10 @@
       </div>
       
       <div class="photo-fan reveal">
-        <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.png" alt="Civil" loading="lazy"></div>
-        <div class="fan-img-wrap img-2"><img src="images/exp-mentor.png" alt="Mentor" loading="lazy"></div>
-        <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Priotech" loading="lazy"></div>
-        <div class="fan-img-wrap img-4"><img src="images/exp-tutor.png" alt="Tutor" loading="lazy"></div>
+        <div class="fan-img-wrap img-1"><img src="images/exp-intern-civil.jpg" alt="On site during a civil engineering internship" loading="lazy"></div>
+        <div class="fan-img-wrap img-2"><img src="images/exp-mentor.jpg" alt="Mentoring students at Wits" loading="lazy"></div>
+        <div class="fan-img-wrap img-3"><img src="images/exp-intern-priotech.jpg" alt="Interning at Priotech Projects" loading="lazy"></div>
+        <div class="fan-img-wrap img-4"><img src="images/exp-tutor.jpg" alt="Tutoring quantities and specification" loading="lazy"></div>
       </div>
 
       <div class="about-story reveal">
@@ -105,7 +113,7 @@
       <div class="about-education reveal">
         <h3>Education</h3>
         <ul class="edu-list">
-          <li><strong>Bachelor of Science (Construction)</strong> - Wits University <span style="color:var(--text-muted); font-size:0.85em;">(Expected Graduation 2027)</span></li>
+          <li><strong>Bachelor of Science (Construction)</strong> - Wits University <span class="edu-note">(Expected Graduation 2027)</span></li>
         </ul>
       </div>
 
@@ -155,8 +163,8 @@
     <!-- ========== CONTACT ========== -->
     <section id="contact" class="section">
       <div class="contact-hero reveal">
-        <img src="images/profile.png" alt="Baxolele" class="contact-avatar" loading="lazy">
-        <p class="contact-funny-bio">I am learning how to bring construction thinking and data together in a practical way. <br><br> You can also try <a href="https://study-pulse-liard.vercel.app/auth" target="_blank" rel="noopener noreferrer" style="color:var(--text-primary); text-decoration:underline;">StudyPulse</a>, my AI-integrated study timer built to help students study with more direction.</p>
+        <img src="images/profile.jpg" alt="Portrait of Baxolele Mazwi" class="contact-avatar" loading="lazy">
+        <p class="contact-funny-bio">I am learning how to bring construction thinking and data together in a practical way. <br><br> You can also try <a href="https://study-pulse-liard.vercel.app/auth" target="_blank" rel="noopener noreferrer" class="inline-link">StudyPulse</a>, my AI-integrated study timer built to help students study with more direction.</p>
       </div>
 
       <div class="section-header reveal reveal-delay">
@@ -228,7 +236,7 @@
         <a href="https://www.instagram.com/bax.lle/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
         <a href="mailto:mazwiibaxolele@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
       </div>
-      <p>&copy; 2026 Baxolele Mazwi.</p>
+      <p>&copy; <span id="footer-year">2026</span> Baxolele Mazwi.</p>
     </div>
   </footer>
 
