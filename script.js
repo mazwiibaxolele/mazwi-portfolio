@@ -24,7 +24,7 @@ const PROJECTS = [
     problem: 'A telecommunications company was experiencing elevated customer churn without a clear understanding of which customer segments were most at risk or why they were leaving. Decisions around retention were being made without data support.',
     approach: 'Pulled and cleaned a dataset of 7,032 customers using pandas. Conducted exploratory data analysis to segment customers by contract type, tenure, and service usage. Built visualisations in matplotlib and seaborn, and modelled churn predictors. Imported into MySQL for structured querying and built a Power BI dashboard for business reporting.',
     outcome: 'Identified a 26.58% overall churn rate. Discovered that 42.71% of month-to-month contract customers churned, and that 47.68% of new customers left within their first year, pointing to an onboarding and early-retention problem.',
-    github: 'https://github.com/mazwiibaxolele/FUTURE_DS_02',
+    github: 'https://github.com/mazwiibaxolele/Telco-Customer-Churn-Analysis',
     image: 'images/project1-a.png',
   },
   {
@@ -35,7 +35,7 @@ const PROJECTS = [
     problem: 'A bank\'s marketing team was running campaigns without insight into where leads were dropping off in the funnel. Budget was being spent across channels without knowing which ones drove actual conversions.',
     approach: 'Analysed campaign data using MySQL to segment leads by stage, channel, and outcome. Built conversion rate calculations at each funnel stage. Designed a Power BI dashboard to give the marketing team a live view of performance by channel and campaign type.',
     outcome: 'Identified the funnel stages with highest drop-off rates and the specific channels that produced the best conversion rates, enabling data-informed budget reallocation.',
-    github: 'https://github.com/mazwiibaxolele/FUTURE_DS_03',
+    github: 'https://github.com/mazwiibaxolele/Bank-Marketing-Campaign-Analysis',
     image: 'images/project2-a.jpeg',
   },
   {
@@ -46,7 +46,7 @@ const PROJECTS = [
     problem: 'A retail business lacked a consolidated view of its sales performance. Revenue and profit data existed in spreadsheets but weren\'t structured for decision-making.',
     approach: 'Ingested and transformed the raw Excel data using Power Query. Built a relational data model and wrote DAX measures for revenue, profit margin, YoY growth, and segment performance. Designed an interactive dashboard with slicers for region, product, and time period.',
     outcome: 'Delivered a single-view dashboard that revealed which product categories and regions were underperforming and where the highest margins were being generated.',
-    github: 'https://github.com/mazwiibaxolele/FUTURE_DS_01',
+    github: 'https://github.com/mazwiibaxolele/Sales-Performance-Analytics',
     image: 'images/project3-a.jpeg',
   }
 ];
