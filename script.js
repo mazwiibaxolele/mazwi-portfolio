@@ -14,7 +14,9 @@ const PROJECTS = [
     outcome: 'The Aim: To transform studying from a blind grind into a data-driven, highly optimized process so students can study less, score higher, and maintain a healthy balance. As someone who wants to be a data scientist in future, the better way to use data is now.',
     github: 'https://github.com/mazwiibaxolele/StudyPulse.git',
     appLink: 'https://study-pulse-liard.vercel.app/auth',
-    image: 'images/studypulse-pic.png',
+    image: 'images/proj-studypulse.png',
+    tag: 'Full-stack app',
+    result: 'Live AI study app',
   },
   {
     id: 1,
@@ -25,7 +27,9 @@ const PROJECTS = [
     approach: 'Pulled and cleaned a dataset of 7,032 customers using pandas. Conducted exploratory data analysis to segment customers by contract type, tenure, and service usage. Built visualisations in matplotlib and seaborn, and modelled churn predictors. Imported into MySQL for structured querying and built a Power BI dashboard for business reporting.',
     outcome: 'Identified a 26.58% overall churn rate. Discovered that 42.71% of month-to-month contract customers churned, and that 47.68% of new customers left within their first year, pointing to an onboarding and early-retention problem.',
     github: 'https://github.com/mazwiibaxolele/Telco-Customer-Churn-Analysis',
-    image: 'images/project1-a.png',
+    image: 'images/proj-telco.png',
+    tag: 'Data analysis',
+    result: '26.58% churn identified',
   },
   {
     id: 2,
@@ -36,7 +40,9 @@ const PROJECTS = [
     approach: 'Analysed campaign data using MySQL to segment leads by stage, channel, and outcome. Built conversion rate calculations at each funnel stage. Designed a Power BI dashboard to give the marketing team a live view of performance by channel and campaign type.',
     outcome: 'Identified the funnel stages with highest drop-off rates and the specific channels that produced the best conversion rates, enabling data-informed budget reallocation.',
     github: 'https://github.com/mazwiibaxolele/Bank-Marketing-Campaign-Analysis',
-    image: 'images/project2-a.jpeg',
+    image: 'images/proj-bank.png',
+    tag: 'Data analysis',
+    result: '88.73% funnel drop-off found',
   },
   {
     id: 3,
@@ -47,7 +53,9 @@ const PROJECTS = [
     approach: 'Ingested and transformed the raw Excel data using Power Query. Built a relational data model and wrote DAX measures for revenue, profit margin, YoY growth, and segment performance. Designed an interactive dashboard with slicers for region, product, and time period.',
     outcome: 'Delivered a single-view dashboard that revealed which product categories and regions were underperforming and where the highest margins were being generated.',
     github: 'https://github.com/mazwiibaxolele/Sales-Performance-Analytics',
-    image: 'images/project3-a.jpeg',
+    image: 'images/proj-sales.png',
+    tag: 'BI dashboard',
+    result: '$2.30M sales analysed',
   }
 ];
 
@@ -286,15 +294,19 @@ function initNavigation() {
     });
 
     const activeSection = qs(`#${id}`);
-    if (activeSection && typeof revealObserver !== 'undefined') {
-      qsa('.reveal', activeSection).forEach(el => {
+    if (activeSection) {
+      // Tab-switched content: reveal reliably with a subtle stagger.
+      // (The IntersectionObserver can't re-fire for elements it already
+      // tracked while the section was display:none, so drive it directly.)
+      qsa('.reveal', activeSection).forEach((el, i) => {
+        if (revealObserver) revealObserver.unobserve(el);
         el.classList.remove('is-visible');
-        revealObserver.observe(el);
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), Math.min(i, 8) * 55);
+        });
       });
-      // Handle items that might have reveal-after-type inside active section
+      // reveal-after-type items are always shown once the section is active
       qsa('.reveal-after-type', activeSection).forEach(el => {
-        // If it's the home tab, we should just make them visible if typing is already done
-        // We'll just force them visible here to prevent them disappearing on tab switch
         el.classList.add('is-visible');
       });
     }
@@ -428,23 +440,38 @@ function renderProjects() {
   
   list.innerHTML = '';
   PROJECTS.forEach(proj => {
-    const el = createEl('div', {
-      className: 'project-item reveal',
-      role: 'button',
-      tabindex: '0',
-    },
+    const media = createEl('div', { className: 'proj-media' },
       createEl('img', {
         src: proj.image,
-        alt: proj.title,
+        alt: `${proj.title} preview`,
         className: 'proj-thumb',
         loading: 'lazy',
       }),
-      createEl('div', { className: 'proj-content' },
-        createEl('div', { className: 'proj-title' }, proj.title),
-        createEl('div', { className: 'proj-desc' }, proj.summary),
-        createSkillTags(proj.tools)
-      )
+      proj.tag ? createEl('span', { className: 'proj-tag' }, proj.tag) : null
     );
+
+    const head = createEl('div', { className: 'proj-head' },
+      createEl('div', { className: 'proj-title' }, proj.title),
+      createEl('span', { className: 'proj-open', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>' })
+    );
+
+    const content = createEl('div', { className: 'proj-content' },
+      head,
+      proj.result ? createEl('div', { className: 'proj-result' },
+        createEl('span', { className: 'proj-result__dot' }),
+        proj.result
+      ) : null,
+      createEl('div', { className: 'proj-desc' }, proj.summary),
+      createSkillTags(proj.tools)
+    );
+
+    const el = createEl('article', {
+      className: 'project-item reveal',
+      role: 'button',
+      tabindex: '0',
+      'aria-label': `View ${proj.title}`,
+    }, media, content);
+
     el.addEventListener('click', () => openProject(proj.id));
     el.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
