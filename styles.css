@@ -274,11 +274,13 @@ button:focus-visible,
 .home-hero {
   margin-top: 40px;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .hero-title {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
   font-size: 2.5rem;
@@ -286,15 +288,44 @@ button:focus-visible,
   letter-spacing: -0.02em;
 }
 
+/* The ghost reserves the finished headline's width so the CV button beside it
+   stays put while the typewriter runs. Without it, centring re-flows the whole
+   line on every keystroke. */
+.typewriter {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.tw-ghost {
+  visibility: hidden;
+}
+
+/* Stands in for the blinking cursor, so the ghost is exactly as wide as the
+   finished live line and the cursor never wraps onto a row of its own. */
+.tw-ghost::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  margin-left: 4px;
+}
+
+.tw-live {
+  position: absolute;
+  inset: 0;
+  text-align: left;
+}
+
 .hero-subtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
   max-width: 90%;
+  margin-inline: auto;
 }
 
 .latest-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 16px;
 }
@@ -312,21 +343,21 @@ button:focus-visible,
   position: relative;
 }
 
-/* Folder sits flush with the text column's left edge; photos fan right.
-   --fg-center is the horizontal centre of the cover (half its width). */
+/* Folder is centred in the column, under the centred hero text.
+   The cover has no `left`, so justify-content sets its static position. */
 .fg-scene {
   position: relative;
   height: 375px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
-  --fg-center: 160px;
 }
 
 .fg-back {
   position: absolute;
   bottom: 16px;
-  left: 10px; /* centred under the 320px cover, which sits at left: 0 */
+  left: 50%;
+  margin-left: -150px; /* half of width, to centre under the cover */
   width: 300px;
   height: 190px;
   border-radius: var(--radius);
@@ -351,7 +382,7 @@ button:focus-visible,
 .fg-photo {
   position: absolute;
   bottom: 44px;
-  left: var(--fg-center); /* centred over the flush-left folder cover */
+  left: 50%; /* centred over the folder cover */
   width: 150px;
   height: 190px;
   margin-left: -75px;
@@ -1007,9 +1038,11 @@ button:focus-visible,
   .photo-fan {
     transform: scale(0.8);
   }
+  .hero-title {
+    font-size: 1.75rem; /* keeps the headline and CV button on one line */
+  }
   .fg-scene {
     height: 325px;
-    --fg-center: 130px; /* mobile cover is 260px wide */
   }
   .fg-photo {
     width: 120px;
@@ -1025,6 +1058,7 @@ button:focus-visible,
   .fg-back {
     width: 240px;
     height: 158px;
+    margin-left: -120px;
   }
 }
 

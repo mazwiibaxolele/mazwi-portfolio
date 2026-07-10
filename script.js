@@ -356,18 +356,18 @@ function initFolderGallery() {
   function layout() {
     const hovered = gallery.classList.contains('hover');
     const photoW = photos[0].offsetWidth || 150;
-    // The folder is flush with the column's left edge, so photos fan to the
-    // RIGHT when opened (a symmetric spread would overflow the left margin).
-    // Derive the centre from the cover so desktop/mobile widths both work.
+    // The folder is centred, so photos fan symmetrically. Derive the centre
+    // from the cover rather than assuming a width, and size the spread by the
+    // narrower side so the outermost photo can never leave the column.
     const coverCenter = cover.offsetLeft + cover.offsetWidth / 2;
-    const room = scene.clientWidth - coverCenter - photoW / 2 - 8;
-    const spread = Math.max(52, Math.min(150, room / (photos.length - 1)));
+    const halfRoom = Math.min(coverCenter, scene.clientWidth - coverCenter) - photoW / 2 - 8;
+    const spread = Math.max(52, Math.min(150, halfRoom / mid));
 
     photos.forEach((photo, i) => {
       const o = i - mid;
       let x, y, rot, sc;
       if (isOpen) {
-        x = i * spread; y = -120; rot = 0; sc = 1.05;
+        x = o * spread; y = -120; rot = 0; sc = 1.05;
       } else if (hovered) {
         x = o * 30; y = o * -10 - 40; rot = o * 8; sc = 1 - Math.abs(o) * 0.03;
       } else {
