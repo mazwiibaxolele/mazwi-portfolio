@@ -312,17 +312,21 @@ button:focus-visible,
   position: relative;
 }
 
+/* Folder sits flush with the text column's left edge; photos fan right.
+   --fg-center is the horizontal centre of the cover (half its width). */
 .fg-scene {
   position: relative;
   height: 375px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
+  --fg-center: 160px;
 }
 
 .fg-back {
   position: absolute;
   bottom: 16px;
+  left: 10px; /* centred under the 320px cover, which sits at left: 0 */
   width: 300px;
   height: 190px;
   border-radius: var(--radius);
@@ -347,7 +351,7 @@ button:focus-visible,
 .fg-photo {
   position: absolute;
   bottom: 44px;
-  left: 50%;
+  left: var(--fg-center); /* centred over the flush-left folder cover */
   width: 150px;
   height: 190px;
   margin-left: -75px;
@@ -1005,6 +1009,7 @@ button:focus-visible,
   }
   .fg-scene {
     height: 325px;
+    --fg-center: 130px; /* mobile cover is 260px wide */
   }
   .fg-photo {
     width: 120px;
