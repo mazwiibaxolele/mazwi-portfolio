@@ -12,8 +12,9 @@ const PROJECTS = [
     problem: 'Students usually measure their productivity by "hours spent studying" instead of actual effectiveness. They use a bunch of disconnected tools: a timer app for focus, a spreadsheet for grades, and a notebook for planning. As a result, they study blindly, unable to see if their 5 hours of "re-reading notes" actually translated into a better test score than 2 hours of "active recall." This leads to burnout, wasted time, and lower-than-expected marks.',
     approach: 'StudyPulse bridges the gap between effort and results. We built a single, unified platform that combines three core pillars: Focus & Execution (smart Pomodoro timer), Grade Tracking (robust marks dashboard), and AI-Driven Insights (analyzes habits and tells them exactly what is working and what isn\'t).',
     outcome: 'The Aim: To transform studying from a blind grind into a data-driven, highly optimized process so students can study less, score higher, and maintain a healthy balance. As someone who wants to be a data scientist in future, the better way to use data is now.',
-    github: 'https://github.com/mazwiibaxolele/StudyPulse.git',
-    appLink: 'https://study-pulse-liard.vercel.app/auth',
+    github: 'https://github.com/mazwiibaxolele/StudyPulse',
+    // Land on the public timer, not the sign-in page
+    appLink: 'https://study-pulse-liard.vercel.app/',
     image: 'images/proj-studypulse.png',
     tag: 'Full-stack app',
     result: 'Live AI study app',
