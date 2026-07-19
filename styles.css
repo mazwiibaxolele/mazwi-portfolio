@@ -271,10 +271,11 @@ button:focus-visible,
 /* ==========================================================================
    HOME
    ========================================================================== */
-/* Home content is left-aligned to the navbar's link strip: the text starts
-   under the H of "Home" and wraps before the last t of "Contact". The two
-   vars are measured and set by alignHomeToNav() in script.js; without them
-   (mobile, nav links hidden) everything falls back to the plain column. */
+/* Home content is left-aligned to the navbar's outer landmarks: the text
+   starts under the avatar bubble and wraps before the theme toggle's right
+   edge. The two vars are measured and set by alignHomeToNav() in script.js;
+   without them (mobile, avatar hidden) everything falls back to the plain
+   column. */
 .home-hero {
   margin-top: 40px;
   margin-bottom: 30px;
@@ -318,12 +319,6 @@ button:focus-visible,
   position: absolute;
   inset: 0;
   text-align: left;
-}
-
-/* Inside the nav-bounded column the headline drops a notch so it and the CV
-   chip share one line without passing Contact's right edge. */
-#home.nav-aligned .hero-title {
-  font-size: 2.2rem;
 }
 
 .hero-subtitle {

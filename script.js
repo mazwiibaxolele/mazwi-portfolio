@@ -623,20 +623,24 @@ function initHamburger() {
 ───────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────
    HOME <-> NAV ALIGNMENT
-   The home text column starts under the H of "Home" and
-   wraps before the last t of "Contact". Measured from the
-   real nav strip so it survives font metric differences.
+   The home content column is guarded by the navbar's two
+   outer landmarks: it starts under the avatar bubble and
+   wraps before the theme toggle's right edge. Measured
+   from the real elements so it survives font and window
+   changes.
 ───────────────────────────────────────────────────── */
 function alignHomeToNav() {
   const home = qs('#home');
-  const links = qs('.nav-links');
+  const avatar = qs('.nav-avatar');
+  const toggle = qs('#theme-toggle');
   const hero = qs('.home-hero');
-  if (!home || !links || !hero) return;
+  if (!home || !avatar || !toggle || !hero) return;
 
-  const rect = links.getBoundingClientRect();
-  // Nav links are hidden behind the hamburger on mobile; fall back to the
-  // plain column there.
-  if (rect.width < 50) {
+  const a = avatar.getBoundingClientRect();
+  const t = toggle.getBoundingClientRect();
+  const width = t.right - a.left;
+  // The avatar hides on small screens; fall back to the plain column there.
+  if (a.width < 10 || width < 200) {
     home.style.removeProperty('--nav-align-left');
     home.style.removeProperty('--nav-align-width');
     home.classList.remove('nav-aligned');
@@ -644,9 +648,9 @@ function alignHomeToNav() {
   }
   // getBoundingClientRect().left is the border-box edge, so it is stable
   // regardless of the padding this function itself applies.
-  const inset = Math.max(0, rect.left - hero.getBoundingClientRect().left);
+  const inset = Math.max(0, a.left - hero.getBoundingClientRect().left);
   home.style.setProperty('--nav-align-left', `${Math.round(inset)}px`);
-  home.style.setProperty('--nav-align-width', `${Math.round(rect.width)}px`);
+  home.style.setProperty('--nav-align-width', `${Math.round(width)}px`);
   home.classList.add('nav-aligned');
 }
 
