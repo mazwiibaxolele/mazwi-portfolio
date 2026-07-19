@@ -621,11 +621,49 @@ function initHamburger() {
 /* ─────────────────────────────────────────────────────
    INIT
 ───────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────
+   HOME <-> NAV ALIGNMENT
+   The home text column starts under the H of "Home" and
+   wraps before the last t of "Contact". Measured from the
+   real nav strip so it survives font metric differences.
+───────────────────────────────────────────────────── */
+function alignHomeToNav() {
+  const home = qs('#home');
+  const links = qs('.nav-links');
+  const hero = qs('.home-hero');
+  if (!home || !links || !hero) return;
+
+  const rect = links.getBoundingClientRect();
+  // Nav links are hidden behind the hamburger on mobile; fall back to the
+  // plain column there.
+  if (rect.width < 50) {
+    home.style.removeProperty('--nav-align-left');
+    home.style.removeProperty('--nav-align-width');
+    home.classList.remove('nav-aligned');
+    return;
+  }
+  // getBoundingClientRect().left is the border-box edge, so it is stable
+  // regardless of the padding this function itself applies.
+  const inset = Math.max(0, rect.left - hero.getBoundingClientRect().left);
+  home.style.setProperty('--nav-align-left', `${Math.round(inset)}px`);
+  home.style.setProperty('--nav-align-width', `${Math.round(rect.width)}px`);
+  home.classList.add('nav-aligned');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = qs('#footer-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   initTheme();
+  alignHomeToNav();
+  window.addEventListener('resize', alignHomeToNav);
+  // Font metrics shift the nav strip once Inter loads; re-measure then.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      alignHomeToNav();
+      window.dispatchEvent(new Event('resize')); // let the folder re-layout too
+    });
+  }
   renderTimeline();
   initFolderGallery();
   renderProjects();
