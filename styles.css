@@ -343,142 +343,101 @@ button:focus-visible,
   padding-left: var(--nav-align-left, 0px);
 }
 
-/* Interactive folder gallery */
-.folder-gallery {
+/* Moments carousel: one full-width photo at a time, white circular arrows,
+   elongating progress dots. Centred in the guarded column. */
+.carousel {
   position: relative;
-}
-
-/* Folder cover sits flush with the same nav-aligned left edge as the text;
-   photos fan to the right where the free space is. --fg-center is half the
-   cover's width. */
-.fg-scene {
-  position: relative;
-  height: 375px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  --fg-center: 160px;
-}
-
-.fg-back {
-  position: absolute;
-  bottom: 16px;
-  left: 10px; /* centred under the cover, which sits at left: 0 */
-  width: 300px;
-  height: 190px;
-  border-radius: var(--radius);
-  background: linear-gradient(to bottom, var(--bg-tertiary), var(--bg-secondary));
-  border: 1px solid var(--border-color);
-  transition: opacity 0.3s ease;
-}
-
-.fg-back::before {
-  content: "";
-  position: absolute;
-  top: -14px;
-  left: -1px;
-  width: 110px;
-  height: 15px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-}
-
-.fg-photo {
-  position: absolute;
-  bottom: 44px;
-  left: var(--fg-center); /* centred over the flush-left folder cover */
-  width: 150px;
-  height: 190px;
-  margin-left: -75px;
-  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 20px 40px var(--fan-shadow);
-  transform-origin: bottom center;
-  transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.4, 1), box-shadow 0.3s ease;
-  pointer-events: none;
-  touch-action: none;
-  will-change: transform;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: var(--nav-align-width, 100%);
+  margin-inline: auto;
   background: var(--bg-secondary);
 }
 
-.folder-gallery.open .fg-photo {
-  pointer-events: auto;
-  cursor: grab;
+.carousel-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
-.fg-photo.dragging {
-  transition: none;
-  cursor: grabbing;
+.carousel-slide {
+  flex: 0 0 100%;
+  height: 400px;
 }
 
-.fg-photo img {
+.carousel-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  pointer-events: none;
+  display: block;
   user-select: none;
   -webkit-user-select: none;
-}
-
-.fg-cover {
-  position: absolute;
-  bottom: 0;
-  width: 320px;
-  height: 170px;
-  border-radius: 16px;
-  background: linear-gradient(to bottom, var(--bg-tertiary), var(--bg-secondary));
-  border: 1px solid var(--border-hover);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 24px;
-  cursor: pointer;
-  z-index: 60;
-  transform-origin: bottom center;
-  transition: transform 0.35s ease, opacity 0.3s ease;
-  box-shadow: 0 -12px 30px var(--fan-shadow);
-}
-
-.folder-gallery.hover:not(.open) .fg-cover {
-  transform: perspective(900px) rotateX(-25deg) translateY(10px);
-}
-
-.folder-gallery.open .fg-cover,
-.folder-gallery.open .fg-back {
-  opacity: 0;
   pointer-events: none;
 }
 
-.fg-label {
-  padding: 8px 18px;
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 10;
 }
 
-.fg-hint {
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  margin-top: -16px;
+.carousel-btn svg {
+  width: 22px;
+  height: 22px;
 }
 
-.folder-gallery.open .fg-hint {
+.carousel-prev { left: 16px; }
+.carousel-next { right: 16px; }
+
+.carousel-btn:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.1);
   opacity: 1;
-  transform: none;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  width: 32px;
+  background: #fff;
 }
 
 /* ==========================================================================
@@ -1047,24 +1006,12 @@ button:focus-visible,
   .hero-title {
     font-size: 1.75rem; /* keeps the headline and CV button on one line */
   }
-  .fg-scene {
-    height: 325px;
-    --fg-center: 130px; /* mobile cover is 260px wide */
+  .carousel-slide {
+    height: 260px;
   }
-  .fg-photo {
-    width: 120px;
-    height: 152px;
-    margin-left: -60px;
-    bottom: 38px;
-  }
-  .fg-cover {
-    width: 260px;
-    height: 140px;
-    padding-bottom: 18px;
-  }
-  .fg-back {
-    width: 240px;
-    height: 158px;
+  .carousel-btn {
+    width: 34px;
+    height: 34px;
   }
 }
 

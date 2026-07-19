@@ -342,98 +342,87 @@ function renderTimeline() {
 }
 
 /* ─────────────────────────────────────────────────────
-   INTERACTIVE FOLDER GALLERY (Home)
+   MOMENTS CAROUSEL (Home)
+   One photo per view; arrows, dots, swipe.
 ───────────────────────────────────────────────────── */
-function initFolderGallery() {
-  const gallery = qs('#folder-gallery');
-  if (!gallery) return;
+const MOMENTS = [
+  { src: 'images/exp-intern-civil.jpg',     alt: 'On site during a civil engineering internship' },
+  { src: 'images/exp-mentor.jpg',           alt: 'Mentoring students at Wits' },
+  { src: 'images/exp-intern-priotech.jpg',  alt: 'Interning at Priotech Projects' },
+  { src: 'images/exp-tutor.jpg',            alt: 'Tutoring quantities and specification' },
+  { src: 'images/moments/moment-01.jpg',    alt: 'Student event group photo' },
+  { src: 'images/moments/moment-02.jpg',    alt: 'Site investigation in hard hats' },
+  { src: 'images/moments/moment-03.jpg',    alt: 'Industry visit under a solar carport' },
+  { src: 'images/moments/moment-04.jpg',    alt: 'Football team lineup before a match' },
+  { src: 'images/moments/moment-05.jpg',    alt: 'With friends on campus' },
+  { src: 'images/moments/moment-06.jpg',    alt: 'Group selfie at a campus event' },
+  { src: 'images/moments/moment-07.jpg',    alt: 'Classmates after a session' },
+  { src: 'images/moments/moment-08.jpg',    alt: 'Campus roadworks in progress' },
+  { src: 'images/moments/moment-09.jpg',    alt: 'Site team in high visibility vests' },
+  { src: 'images/moments/moment-10.jpg',    alt: 'Reading drawings on site' },
+  { src: 'images/moments/moment-11.jpg',    alt: 'Pipe inspection equipment on site' },
+  { src: 'images/moments/moment-12.jpg',    alt: 'Excavation works near campus' },
+  { src: 'images/moments/moment-13.jpg',    alt: 'Off duty' },
+];
 
-  const scene  = qs('.fg-scene', gallery);
-  const cover  = qs('#fg-cover');
-  const photos = qsa('.fg-photo', gallery);
-  const mid = (photos.length - 1) / 2;
-  let isOpen = false;
+function initCarousel() {
+  const root = qs('#moments-carousel');
+  if (!root) return;
 
-  function layout() {
-    const hovered = gallery.classList.contains('hover');
-    const photoW = photos[0].offsetWidth || 150;
-    // The folder is centred, so photos fan symmetrically. Derive the centre
-    // from the cover rather than assuming a width, and size the spread by the
-    // narrower side so the outermost photo can never leave the column.
-    const coverCenter = cover.offsetLeft + cover.offsetWidth / 2;
-    const halfRoom = Math.min(coverCenter, scene.clientWidth - coverCenter) - photoW / 2 - 8;
-    const spread = Math.max(52, Math.min(150, halfRoom / mid));
+  const track = qs('#carousel-track');
+  const dotsWrap = qs('#carousel-dots');
+  const prev = qs('#carousel-prev');
+  const next = qs('#carousel-next');
+  let index = 0;
 
-    photos.forEach((photo, i) => {
-      const o = i - mid;
-      let x, y, rot, sc;
-      if (isOpen) {
-        x = o * spread; y = -120; rot = 0; sc = 1.05;
-      } else if (hovered) {
-        x = o * 30; y = o * -10 - 40; rot = o * 8; sc = 1 - Math.abs(o) * 0.03;
-      } else {
-        x = o * 3; y = o * -5; rot = o * 3; sc = 1 - Math.abs(o) * 0.03;
-      }
-      photo.dataset.x = x;
-      photo.dataset.y = y;
-      photo.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(${sc})`;
-      photo.style.zIndex = isOpen ? 50 : 10 + i;
-    });
-  }
+  MOMENTS.forEach((m, i) => {
+    const slide = createEl('div', { className: 'carousel-slide' },
+      createEl('img', { src: m.src, alt: m.alt, loading: i === 0 ? 'eager' : 'lazy', decoding: 'async', draggable: 'false' })
+    );
+    track.appendChild(slide);
 
-  function setOpen(open) {
-    isOpen = open;
-    gallery.classList.toggle('open', open);
-    if (!open) gallery.classList.remove('hover');
-    cover.setAttribute('aria-expanded', String(open));
-    layout();
-    if (!open) cover.focus();
-  }
-
-  cover.addEventListener('click', () => setOpen(true));
-  cover.addEventListener('mouseenter', () => { if (!isOpen) { gallery.classList.add('hover'); layout(); } });
-  cover.addEventListener('mouseleave', () => { gallery.classList.remove('hover'); layout(); });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && isOpen) setOpen(false);
+    const dot = createEl('button', { className: 'carousel-dot', 'aria-label': `Go to photo ${i + 1}` });
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
   });
 
-  window.addEventListener('resize', layout);
+  const dots = qsa('.carousel-dot', dotsWrap);
 
-  // Drag any photo down past 100px to close; otherwise it snaps back
-  photos.forEach(photo => {
-    photo.addEventListener('pointerdown', e => {
-      if (!isOpen) return;
-      e.preventDefault();
-      try { photo.setPointerCapture(e.pointerId); } catch (err) { /* pointer already lost */ }
-      photo.classList.add('dragging');
-      const startX = e.clientX;
-      const startY = e.clientY;
-      const baseX = parseFloat(photo.dataset.x) || 0;
-      const baseY = parseFloat(photo.dataset.y) || 0;
-      let dy = 0;
+  function go(i) {
+    index = Math.max(0, Math.min(MOMENTS.length - 1, i));
+    // The track is as wide as one slide, so 100% steps one photo at a time
+    track.style.transform = `translateX(${-index * 100}%)`;
+    prev.disabled = index === 0;
+    next.disabled = index === MOMENTS.length - 1;
+    dots.forEach((d, j) => d.classList.toggle('active', j === index));
+  }
 
-      const onMove = ev => {
-        const dx = ev.clientX - startX;
-        dy = ev.clientY - startY;
-        photo.style.zIndex = 150;
-        photo.style.transform = `translate(${baseX + dx}px, ${baseY + dy}px) rotate(5deg) scale(1.15)`;
-      };
-      const onUp = () => {
-        photo.removeEventListener('pointermove', onMove);
-        photo.removeEventListener('pointerup', onUp);
-        photo.removeEventListener('pointercancel', onUp);
-        photo.classList.remove('dragging');
-        if (dy > 100) setOpen(false);
-        else layout();
-      };
-      photo.addEventListener('pointermove', onMove);
-      photo.addEventListener('pointerup', onUp);
-      photo.addEventListener('pointercancel', onUp);
-    });
+  prev.addEventListener('click', () => go(index - 1));
+  next.addEventListener('click', () => go(index + 1));
+
+  // Swipe: 40px of horizontal drag moves one photo
+  let startX = null;
+  root.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    startX = e.clientX;
+  });
+  root.addEventListener('pointerup', e => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    if (dx <= -40) go(index + 1);
+    else if (dx >= 40) go(index - 1);
+    startX = null;
+  });
+  root.addEventListener('pointercancel', () => { startX = null; });
+
+  // Keyboard: arrow keys while the carousel has focus
+  root.tabIndex = 0;
+  root.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
   });
 
-  layout();
+  go(0);
 }
 
 /* ─────────────────────────────────────────────────────
@@ -669,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   renderTimeline();
-  initFolderGallery();
+  initCarousel();
   renderProjects();
   renderCerts();
   initBackBtn();
