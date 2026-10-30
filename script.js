@@ -543,6 +543,25 @@ function renderCerts() {
    MODAL LOGIC
 ───────────────────────────────────────────────────── */
 let lastFocusedEl = null;
+let modalBackgroundStates = null;
+
+function setModalBackgroundInert(inert) {
+  const main = qs('#main');
+  const dialog = qs('#project-detail');
+
+  if (inert) {
+    const background = [
+      ...[...document.body.children].filter(el => el !== main && el.tagName !== 'SCRIPT'),
+      ...[...main.children].filter(el => el !== dialog)
+    ];
+    modalBackgroundStates = new Map(background.map(el => [el, el.inert]));
+    background.forEach(el => { el.inert = true; });
+    return;
+  }
+
+  modalBackgroundStates?.forEach((wasInert, el) => { el.inert = wasInert; });
+  modalBackgroundStates = null;
+}
 
 function openProject(id) {
   const proj = PROJECTS.find(p => p.id === id);
@@ -552,7 +571,7 @@ function openProject(id) {
   const content = qs('#detail-content');
   content.innerHTML = `
     <img src="${proj.image}" alt="${proj.title}" class="pd-img">
-    <h2 class="pd-title">${proj.title}</h2>
+    <h2 class="pd-title" id="project-dialog-title">${proj.title}</h2>
     <div class="tl-skills pd-skills">
       ${proj.tools.map(t => `<span class="tl-skill">${t}</span>`).join('')}
     </div>
@@ -573,6 +592,7 @@ function openProject(id) {
   `;
 
   qs('#project-detail').classList.remove('hidden');
+  setModalBackgroundInert(true);
   document.body.style.overflow = 'hidden'; // prevent bg scroll
   window.scrollTo({ top: 0 }); // Just to be safe
   qs('#back-btn').focus();
@@ -580,6 +600,7 @@ function openProject(id) {
 
 function closeProjectDetail() {
   qs('#project-detail').classList.add('hidden');
+  setModalBackgroundInert(false);
   document.body.style.overflow = '';
   if (lastFocusedEl) {
     lastFocusedEl.focus();
@@ -590,10 +611,33 @@ function closeProjectDetail() {
 function initBackBtn() {
   qs('#back-btn').addEventListener('click', closeProjectDetail);
   
-  // Close on Escape key
+  // Keep keyboard focus inside the modal and close it with Escape.
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !qs('#project-detail').classList.contains('hidden')) {
+    const dialog = qs('#project-detail');
+    if (dialog.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') {
       closeProjectDetail();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+      if (!focusable.length) {
+        e.preventDefault();
+        dialog.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
   
