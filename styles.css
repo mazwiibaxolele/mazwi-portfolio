@@ -729,6 +729,27 @@ button:focus-visible,
   color: var(--text-secondary);
 }
 
+.cert-detail {
+  padding: 0 20px 14px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.cert-image-link {
+  display: block;
+  background: var(--bg-secondary);
+}
+
+.cert-image {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  object-position: top center;
+  background: #fff;
+}
+
 .cert-cred {
   padding: 0 20px 20px;
   background: var(--bg-secondary);

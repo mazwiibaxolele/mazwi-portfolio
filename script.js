@@ -128,6 +128,13 @@ const EXPERIENCES = [
 
 const CERTIFICATIONS = [
   {
+    title: 'Civic Leadership Programme',
+    issuer: 'University of the Witwatersrand',
+    detail: 'Seven-day programme · June 2026',
+    image: 'images/certifications/civic-leadership-transcript.png',
+    link: 'documents/civic-leadership-programme-transcript.pdf'
+  },
+  {
     title: 'Data Analyst Associate',
     issuer: 'DataCamp',
     credentialId: 'DAA0017949742800',
@@ -495,6 +502,27 @@ function renderCerts() {
       )
     );
     card.appendChild(header);
+
+    if (cert.detail) {
+      card.appendChild(createEl('div', { className: 'cert-detail' }, cert.detail));
+    }
+
+    if (cert.image) {
+      const previewLink = createEl('a', {
+        className: 'cert-image-link',
+        href: cert.link,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        'aria-label': `Open ${cert.title} transcript (PDF)`
+      });
+      previewLink.appendChild(createEl('img', {
+        className: 'cert-image',
+        src: cert.image,
+        alt: `${cert.title} transcript issued by ${cert.issuer}`,
+        loading: 'lazy'
+      }));
+      card.appendChild(previewLink);
+    }
 
     if (cert.credentialId) {
       const credText = `Credential ID ${cert.credentialId}`;
