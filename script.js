@@ -131,7 +131,7 @@ const CERTIFICATIONS = [
     title: 'Civic Leadership Programme',
     issuer: 'University of the Witwatersrand',
     detail: 'Seven-day programme · June 2026',
-    image: 'images/certifications/civic-leadership-transcript.png',
+    downloadLabel: 'Download transcript (PDF)',
     link: 'documents/civic-leadership-programme-transcript.pdf'
   },
   {
@@ -507,21 +507,15 @@ function renderCerts() {
       card.appendChild(createEl('div', { className: 'cert-detail' }, cert.detail));
     }
 
-    if (cert.image) {
-      const previewLink = createEl('a', {
-        className: 'cert-image-link',
+    if (cert.downloadLabel && cert.link) {
+      const downloadContainer = createEl('div', { className: 'cert-cred' });
+      downloadContainer.appendChild(createEl('a', {
+        className: 'cert-cred-link',
         href: cert.link,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        'aria-label': `Open ${cert.title} transcript (PDF)`
-      });
-      previewLink.appendChild(createEl('img', {
-        className: 'cert-image',
-        src: cert.image,
-        alt: `${cert.title} transcript issued by ${cert.issuer}`,
-        loading: 'lazy'
-      }));
-      card.appendChild(previewLink);
+        download: '',
+        'aria-label': `${cert.downloadLabel} for ${cert.title}`
+      }, cert.downloadLabel));
+      card.appendChild(downloadContainer);
     }
 
     if (cert.credentialId) {
